@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="ColdCall OneTap" name="apple-mobile-web-app-title"/>
+<meta content="#0f1a23" name="theme-color"/>
+<meta content="telephone=no" name="format-detection"/>
+<meta content="default-src 'self'; script-src 'sha256-Yk6zWLyI617WeN62nVNIgOfhn+I/0XsEcOb2whtVuUk='; style-src 'self' 'unsafe-inline'; connect-src 'none'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'" http-equiv="Content-Security-Policy"/>
+<link href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iOCIgZmlsbD0iIzFlNDczZCIvPjx0ZXh0IHg9IjE2IiB5PSIyMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxNiIgZmlsbD0iI2E1ZTRjMCI+4piOPC90ZXh0Pjwvc3ZnPgo=" rel="icon" type="image/svg+xml"/>
+<link href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iOCIgZmlsbD0iIzFlNDczZCIvPjx0ZXh0IHg9IjE2IiB5PSIyMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxNiIgZmlsbD0iI2E1ZTRjMCI+4piOPC90ZXh0Pjwvc3ZnPgo=" rel="apple-touch-icon"/>
+<title>ColdCall OneTap｜測試版v2.0.1</title>
+<style>
+:root{color-scheme:dark;--bg:#0d1720;--panel:#142530;--panel2:#1d3440;--edge:#34525d;--ink:#f2f8f6;--sub:#afc5c9;--green:#a5e4c0;--green-deep:#1e473d;--gold:#efc78b;--danger:#efaaa9;--shadow:0 16px 35px #0002}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(180deg,#193845 0,#0d1720 380px);color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"PingFang HK","Noto Sans TC",sans-serif;padding-bottom:calc(92px + env(safe-area-inset-bottom));min-height:100vh}
+button,input,textarea,select{font:inherit}button,a{touch-action:manipulation}button{border:0;cursor:pointer}button:disabled,.disabled{opacity:.43;cursor:not-allowed}a{color:var(--green)}.shell{width:min(720px,100%);padding:0 18px;margin:auto}header{padding:calc(18px + env(safe-area-inset-top)) 0 14px;border-bottom:1px solid #ffffff13}
+.brand{color:var(--green);font-size:12px;font-weight:850;letter-spacing:.16em}.brand em{color:var(--gold);font-style:normal}.version{font-size:11px;color:var(--gold);white-space:nowrap}.byline{font-size:12px;color:var(--sub);margin:6px 0 0}.byline b{color:var(--gold)}h1{font-size:24px;line-height:1.3;margin:11px 0 0;letter-spacing:-.05em}.page{display:none}.page.active{display:block}.page-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:20px 0 14px}.page-heading h2{font-size:22px;line-height:1.3;margin:0}.muted,.hint{color:var(--sub);font-size:12px}.tiny{color:var(--sub);font-size:11px}.eyebrow{font-size:11px;letter-spacing:.11em;color:var(--gold);font-weight:800}.card{background:var(--panel);border:1px solid var(--edge);border-radius:20px;padding:17px;margin:12px 0;box-shadow:var(--shadow)}.card h3{margin:2px 0 10px;font-size:17px}.flat{background:var(--panel2);border-radius:15px;padding:13px}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.row.start{align-items:flex-start}.row .grow{flex:1;min-width:0}.divider{border-top:1px solid #ffffff1b;margin:14px 0}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{background:var(--panel2);border-radius:15px;padding:13px 9px}.stat strong{display:block;font-size:25px;line-height:1.15;font-weight:800}.stat span{font-size:11px;color:var(--sub)}.chip{display:inline-flex;align-items:center;gap:5px;border:1px solid #497b68;color:var(--green);border-radius:50px;padding:4px 11px;font-size:11px;white-space:nowrap}.chip.warn{color:var(--gold);border-color:#927652}.chip.danger{color:var(--danger);border-color:#965d60}.number-card{background:linear-gradient(130deg,#244941,#1d313e);border:1px solid #598071;border-radius:19px;padding:24px 15px;text-align:center;margin-top:12px}.number-card .label{color:#c0dad3;font-size:12px}.contact-name{font-size:22px;font-weight:800;margin:7px 0 3px;overflow-wrap:anywhere}.contact-number{font-size:clamp(26px,7vw,38px);font-weight:850;letter-spacing:-.03em;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.contact-note{margin-top:10px;font-size:12px;color:#d5e7df;white-space:pre-wrap;overflow-wrap:anywhere}.progress{font-size:12px;color:#bed7cf;margin-top:7px}.call-action{display:flex;align-items:center;justify-content:center;text-decoration:none;gap:9px;background:var(--green);color:#103226;font-size:18px;font-weight:850;padding:15px 12px;border-radius:14px;min-height:56px}.call-action.disabled{pointer-events:none}.btn{padding:11px 14px;min-height:45px;border-radius:12px;font-weight:650}.btn.primary{background:var(--green);color:#0c3425}.btn.secondary{background:#2b4552;color:var(--ink);border:1px solid #58747f}.btn.danger{background:#58333b;color:#ffdddd;border:1px solid #935a63}.btn.ghost{background:transparent;border:1px solid #4c6975;color:var(--sub)}.btn.small{min-height:37px;padding:7px 10px;font-size:12px}.btn.full{width:100%}.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.actions button{min-height:64px;text-align:center;font-weight:680;padding:8px 5px;font-size:13px}.actions button.danger{background:#50323b}.actions button .symbol{display:block;font-size:18px;margin-bottom:2px}.two-col{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.form-label{display:block;color:#c8dce0;font-size:13px;margin:12px 0 5px}.input{display:block;width:100%;color:var(--ink);background:#0c1b25;border:1px solid #57707a;border-radius:12px;padding:12px;min-height:46px;outline:0}.input:focus{border-color:var(--green);box-shadow:0 0 0 2px #9be4b522}textarea.input{resize:vertical;min-height:94px}.helper{margin-top:8px;font-size:12px;color:var(--sub)}.info{border-left:3px solid var(--gold);background:#33404a;padding:11px 12px;border-radius:8px;font-size:12px}.good{border-left:3px solid var(--green);background:#1b3f37;padding:11px 12px;border-radius:8px;font-size:12px}.error{border-left:3px solid var(--danger);background:#452a33;padding:11px 12px;border-radius:8px;font-size:12px}.agree{display:flex;align-items:flex-start;gap:10px;padding:12px;border:1px solid #55746c;border-radius:12px;background:#18342f;margin-top:11px;font-size:12px;line-height:1.75}.agree input{flex:none;margin:3px 0 0;width:19px;height:19px;accent-color:var(--green)}details{border:1px solid #3f5965;background:#162833;border-radius:13px;padding:11px 13px;margin:10px 0}details summary{cursor:pointer;color:var(--ink);font-weight:650;font-size:13px}details[open] summary{margin-bottom:10px}details p{font-size:12px;color:var(--sub);margin:5px 0;line-height:1.75}.list{display:grid;gap:9px}.person{border:1px solid #37545f;background:#172b36;border-radius:15px;padding:13px}.person b{font-size:14px}.person .tel{font-size:12px;color:#d3e8e2;margin:3px 0}.person .meta{font-size:11px;color:var(--sub);margin:5px 0;white-space:pre-wrap;overflow-wrap:anywhere}.person .buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}.person .buttons button{flex:1}.tabs{display:flex;gap:7px;overflow:auto;padding:2px 0 8px;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tabs button{white-space:nowrap;background:#203440;border:1px solid #405965;color:#c7dbe1;border-radius:20px;padding:7px 13px;font-size:12px}.tabs button.selected{color:#103426;background:var(--green);border-color:var(--green);font-weight:700}.empty{text-align:center;padding:29px 13px;color:var(--sub);border:1px dashed #46636c;border-radius:15px;font-size:13px}.steps{display:flex;align-items:center;gap:6px;margin:12px 0 18px}.steps span{flex:1;text-align:center;border-radius:20px;background:#20343f;color:#9bb9c0;font-size:11px;padding:7px 3px}.steps span.active{background:var(--green);color:#103226;font-weight:800}.colcheck{display:flex;align-items:center;gap:10px;border:1px solid #4d6874;border-radius:12px;padding:11px 12px;margin:9px 0}.colcheck input{width:19px;height:19px;accent-color:var(--green)}.colcheck strong{display:block;font-size:13px}.colcheck small{font-size:11px;color:var(--sub)}.previewStats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.previewStats>div{background:var(--panel2);border-radius:10px;padding:10px 6px;text-align:center;color:var(--sub);font-size:11px}.previewStats strong{display:block;color:var(--ink);font-size:21px}.sample{border-bottom:1px solid #ffffff14;display:flex;justify-content:space-between;gap:10px;padding:8px 0;font-size:12px}.sample:last-child{border:0}.sample b{overflow-wrap:anywhere}.history{max-height:420px;overflow:auto}.history-entry{border-bottom:1px solid #ffffff1c;padding:9px 0;display:flex;gap:8px;justify-content:space-between;font-size:12px}.history-entry:last-child{border:0}.history-entry small{display:block;color:var(--sub);font-size:11px}.history-entry .btn{flex:none}.dock{position:fixed;z-index:15;bottom:calc(65px + env(safe-area-inset-bottom));left:0;right:0;pointer-events:none}.dock-inner{width:min(720px,100%);margin:auto;padding:8px 18px;background:linear-gradient(180deg,transparent,#0d1720 25%);display:flex;gap:8px;pointer-events:auto}.dock-inner .call-action{flex:1;font-size:15px;min-height:50px}.dock-inner .btn{min-height:50px}.bottom-nav{position:fixed;z-index:20;bottom:0;left:0;right:0;background:#13242ef5;border-top:1px solid #3b5b63;backdrop-filter:blur(20px);padding-bottom:env(safe-area-inset-bottom)}.nav-inner{width:min(720px,100%);margin:auto;display:grid;grid-template-columns:repeat(3,1fr)}.nav-inner button{background:transparent;color:#b9cdd0;font-size:11px;min-height:65px;padding:7px 0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px}.nav-inner button span{font-size:20px;line-height:1.2}.nav-inner button.active{color:var(--green);font-weight:750}.toast{position:fixed;z-index:50;top:calc(10px + env(safe-area-inset-top));bottom:auto;left:14px;right:14px;max-width:690px;margin:auto;background:#d9f3df;color:#103629;padding:14px 16px;border-radius:12px;box-shadow:0 15px 45px #0009;font-size:13px;line-height:1.45}.hidden{display:none!important}.foot{text-align:center;color:var(--sub);font-size:11px;margin:20px 0}.dialog{background:#182b35;border:1px solid #63817c;border-radius:20px;color:var(--ink);width:min(550px,calc(100% - 24px));max-height:min(86dvh,820px);padding:20px;overflow:auto;box-shadow:0 20px 70px #000b}.dialog::backdrop{background:#000c}.dialog h2{font-size:19px;margin:0}.dialog .editor-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:15px}.warning-text{color:var(--gold)}.page-title-row{display:flex;justify-content:space-between;align-items:center;gap:10px}.count-pill{border:1px solid #4b7668;color:var(--green);padding:3px 9px;border-radius:50px;font-size:11px}.backup-status{font-size:12px;color:var(--sub);margin:8px 0}
+@media(min-width:720px){header .shell{padding-left:28px;padding-right:28px}body{padding-bottom:112px}}
+@media(max-width:370px){.shell{padding-left:12px;padding-right:12px}.actions button{font-size:12px}.card{padding:14px}.contact-number{font-size:25px}}
+
+/* Two visually distinct modes, with separately stored contact lists. */
+.mode-switch{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:16px 0 0;padding:5px;border-radius:16px;background:#0d2029;border:1px solid #486873}
+.mode-switch button{background:transparent;color:#c2d6d8;border:1px solid transparent;border-radius:12px;min-height:49px;font-size:15px;font-weight:800;letter-spacing:.02em}
+.mode-switch button.active{color:#102f27;background:var(--green);box-shadow:0 3px 9px #0004}
+.mode-switch button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.onion-only{display:none}
+body[data-mode="onion"] .onion-only{display:block}
+body[data-mode="onion"] .full-only{display:none!important}
+body[data-mode="onion"]{padding-bottom:calc(35px + env(safe-area-inset-bottom))}
+.onion-card{padding:19px 16px}
+.onion-card .number-card{padding:32px 12px}
+.onion-card .contact-number{font-size:clamp(26px,8.3vw,42px)}
+.onion-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.onion-import-choice{padding:11px 0;border-bottom:1px solid #36525a}
+.onion-import-choice label{display:flex;align-items:center;gap:10px;cursor:pointer}
+.onion-import-choice input{width:20px;height:20px;accent-color:var(--green)}
+.onion-import-choice small{display:block;color:var(--sub);font-size:11px}
+.onion-samples{color:var(--sub);font-size:12px;overflow-wrap:anywhere;margin:9px 0}
+.onion-onboarding{border:1px solid #5b746e;border-radius:13px;background:#193b35;padding:12px;color:#d9e9e2}
+.onion-count{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:13px 0}
+.onion-foot{color:var(--sub);font-size:12px;text-align:center;margin:24px 0 5px}
+
+/* 1.0.2: minimal onion contact editing, history and export */
+.onion-results{padding-top:2px}.onion-results .actions{grid-template-columns:repeat(2,1fr)}
+.onion-results .actions button{min-height:49px}.onion-only .history-entry{align-items:center}
+.onion-only .history-entry .grow{min-width:0;overflow-wrap:anywhere}
+.onion-only .history{max-height:310px}
+
+/* Unified UX iteration: identical navigation and action positions in both modes. */
+body[data-mode="onion"]{padding-bottom:calc(184px + env(safe-area-inset-bottom))}
+.onion-view{display:none!important}.onion-view.active{display:block!important}
+.onion-view.hidden{display:none!important}
+.ui-hidden-call{display:none!important}
+.page-heading h2{font-size:21px}
+.card,.onion-card{border-radius:19px;padding:16px;margin:12px 0}
+.number-card,.onion-card .number-card{padding:22px 14px;background:linear-gradient(145deg,#21463d,#203541);border-color:#567c70}
+.call-action{font-size:16px;font-weight:800;display:flex;margin-top:14px;min-height:74px;border-radius:22px}
+.bottom-nav .nav-inner button{min-height:64px}
+.gate-notice{background:#3a3426;border:1px solid #8e7d57;border-radius:13px;padding:11px;margin:12px 0 4px;display:flex;align-items:center;justify-content:space-between;gap:9px}
+.gate-notice strong{font-size:13px;color:#ffe0a6;display:block}.gate-notice small{font-size:11px;color:#e4d6b7;display:block;line-height:1.5}
+.gate-notice.hidden{display:none}
+.result-wrap{display:grid;gap:11px;margin-top:10px}
+.result-group{display:block;background:#1a2c35;border:1px solid #344d59;border-radius:13px;padding:11px}
+.result-label{font-size:12px;color:#c9dbdf;font-weight:750;margin:0 0 8px}
+.result-grid{display:grid;gap:12px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.result-grid .btn{min-height:104px;padding:14px 10px;font-size:16px;white-space:normal;border-radius:22px;font-weight:700}
+.result-grid .btn.danger{background:#653945;border-color:#9a6170}
+#onionDialSection .onion-actions{margin-top:12px}
+#onionDialSection .onion-actions button{font-size:12px}
+#onionImportSection .page-heading{margin-top:2px}
+#onionContactsSection .person .buttons{margin-top:9px}
+#onionContactsSection .person .buttons button{font-size:12px}
+#onionSettingsSection .card{margin-top:12px}
+#onionContactsSection .history{max-height:500px}
+#onionDialSection #onionResults{margin-top:7px}
+#onionDialSection #onionResults .eyebrow{padding-top:2px}
+#onionDialSection .gate-notice{margin-top:12px}
+#onionImportSection .card{box-shadow:none}
+#callCard .result-wrap .btn:focus-visible, .dock-inner a:focus-visible,.bottom-nav button:focus-visible,.result-grid button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+#onionDialSection .onion-card .call-action{display:none}
+.onion-only{display:none!important}
+@media(max-width:360px){.result-grid .btn{font-size:14px;min-height:92px}.mode-switch button{font-size:13px}}
+
+/* Compact call controls: eight actions in four rows on narrow phones. */
+#callCard .result-wrap{gap:8px;margin-top:9px}
+#callCard .result-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+#callCard .result-grid .btn{min-height:48px;padding:8px 7px;font-size:14px;line-height:1.25;border-radius:14px;font-weight:680}
+#callCard #callBtn{min-height:58px;padding:10px 12px;font-size:16px;line-height:1.3;border-radius:16px}
+#callCard .divider{margin:11px 0}
+@media(max-width:360px){#callCard .result-grid .btn{min-height:48px;padding:8px 4px;font-size:13px}}
+
+/* ===== v2.0.1 one-handed + follow-up + stats ===== */
+:root{--nav-h:65px;--dock-h:198px}
+body{padding-bottom:calc(var(--nav-h) + var(--dock-h) + 20px + env(safe-area-inset-bottom))}
+.stats-wide{grid-template-columns:repeat(3,1fr)}
+@media(min-width:560px){.stats-wide{grid-template-columns:repeat(6,1fr)}}
+.stats-wide .stat{padding:10px 7px}
+.stats-wide .stat strong{font-size:22px}
+.stats-wide .stat span{font-size:10px;line-height:1.35;display:block}
+.resume-banner{background:#1c3a33;border:1px solid #4d8a74;border-radius:14px;padding:12px 14px;margin:10px 0;display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.resume-banner strong{display:block;color:var(--green);font-size:13px}
+.resume-banner small{display:block;color:#d5e7df;font-size:11px;line-height:1.5;margin-top:3px}
+.resume-banner.hidden{display:none}
+.backup-nudge{background:#3a3426;border:1px solid #8e7d57;border-radius:14px;padding:11px 13px;margin:8px 0 4px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.backup-nudge strong{display:block;color:#ffe0a6;font-size:13px}
+.backup-nudge small{display:block;color:#e4d6b7;font-size:11px;line-height:1.5;margin-top:3px}
+.backup-nudge.hidden{display:none}
+.consent-flag{background:#3a2c26;border:1px solid #8d6a57;border-radius:13px;padding:11px;margin:10px 0 4px}
+.consent-flag strong{display:block;color:#ffd2b0;font-size:13px}
+.consent-flag small{display:block;color:#f0d9c8;font-size:11px;line-height:1.5;margin-top:3px}
+.consent-flag.hidden{display:none}
+.follow-up-panel{background:#1a3340;border:1px solid #5a8aa0;border-radius:16px;padding:14px;margin:12px 0 4px}
+.follow-up-panel.hidden{display:none}
+.follow-up-panel h3{margin:0 0 8px;font-size:16px}
+.follow-chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:10px 0}
+@media(min-width:420px){.follow-chips{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.follow-chips .btn{min-height:52px;font-size:14px}
+.follow-up-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+#pageDial #callCard{margin-bottom:8px}
+#callCard .number-card{position:relative;z-index:1}
+.script-box textarea{min-height:110px}
+.dnc-item{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid #ffffff14}
+.dnc-item:last-child{border-bottom:0}
+.dnc-item .tel{font-variant-numeric:tabular-nums}
+.highlight-results{outline:2px solid var(--gold);outline-offset:4px;border-radius:16px}
+.dock{position:fixed;z-index:15;bottom:calc(var(--nav-h) + env(safe-area-inset-bottom));left:0;right:0;pointer-events:none;background:transparent}
+.dock.hidden{display:none}
+.dock-inner{width:min(720px,100%);margin:auto;padding:10px 14px 10px;background:#0d1720;border-top:1px solid #3b5b63;display:flex;flex-direction:column;align-items:stretch;gap:8px;pointer-events:auto;box-shadow:0 -10px 24px #0d1720}
+.dock-inner #resultSection{width:100%;margin:0}
+.dock-inner .result-wrap{margin:0;gap:8px}
+.dock-inner .dock-results{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.dock-inner .dock-results .btn{min-height:50px;padding:6px 4px;font-size:14px;border-radius:14px;font-weight:740}
+.dock-inner .call-action{width:100%;flex:none;min-height:56px;font-size:17px;border-radius:16px;margin:0}
+.extras-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.extras-grid .btn{min-height:48px;font-size:14px}
+@media(max-width:430px){
+  header{padding-top:calc(8px + env(safe-area-inset-top));padding-bottom:6px}
+  h1{font-size:19px;margin:4px 0 0}
+  .byline{display:none}
+  .page-heading{margin:8px 0 6px}
+  .page-heading h2{font-size:18px}
+  .stats{gap:5px}
+  .stats-wide .stat{padding:6px 5px;border-radius:12px}
+  .stats-wide .stat strong{font-size:17px}
+  .resume-banner{padding:8px 10px;margin:6px 0}
+  .resume-banner strong{font-size:12px}
+  .backup-nudge{padding:9px 10px;margin:8px 0}
+  #callCard{padding:12px;margin:6px 0 8px}
+  .number-card{padding:12px 10px;margin-top:6px}
+  .contact-name{font-size:17px;margin:2px 0 0}
+  .contact-number{font-size:clamp(20px,6.6vw,28px);margin:0}
+  .contact-note{margin-top:6px;font-size:11px}
+  #currentDetails{max-height:2.8em;overflow:auto;}
+  .progress{margin-top:4px;font-size:11px}
+  .card{padding:12px;margin:8px 0}
+  :root{--dock-h:176px}
+  .dock-inner{padding:8px 10px 8px;gap:6px}
+  .dock-inner .dock-results{gap:6px}
+  .dock-inner .dock-results .btn{min-height:46px;font-size:13px;padding:5px 2px;border-radius:12px}
+  .dock-inner .call-action{min-height:50px;font-size:16px;border-radius:14px}
+}
+@media(max-width:360px){
+  :root{--dock-h:166px}
+  h1{font-size:17px}
+  .stats-wide .stat strong{font-size:15px}
+  .stats-wide .stat span{font-size:9px}
+  .contact-name{font-size:16px}
+  .contact-number{font-size:20px}
+  .dock-inner{padding:6px 8px 7px}
+  .dock-inner .dock-results .btn{min-height:42px;font-size:12px}
+  .dock-inner .call-action{min-height:46px;font-size:15px}
+}
+
+
+.terms-link{background:none;border:0;padding:0;color:var(--green);font:inherit;text-decoration:underline;cursor:pointer;touch-action:manipulation}
+#termsDialog{width:min(780px,calc(100% - 24px));max-height:min(90dvh,920px)}
+#termsDialog .terms-body{font-size:14px;line-height:1.7}
+#termsDialog .terms-body h1{font-size:22px;margin:8px 0 4px}
+#termsDialog .terms-body h2{font-size:16px;color:var(--gold);margin:0 0 16px;font-weight:600}
+#termsDialog .terms-body h3{font-size:16px;color:var(--gold);margin:22px 0 8px}
+#termsDialog .terms-body .warning{background:#2c3940;border-left:3px solid var(--gold);padding:12px;border-radius:8px;margin:12px 0}
+#termsDialog .terms-foot{font-size:12px;color:var(--sub);margin-top:22px;padding-top:12px;border-top:1px solid #39505a}
+.save-sheet{position:fixed;z-index:45;left:14px;right:14px;bottom:calc(var(--nav-h,65px) + 12px + env(safe-area-inset-bottom));max-width:690px;margin:auto;background:#182b35;border:1px solid #63817c;border-radius:16px;padding:14px;box-shadow:0 16px 40px #0009}
+.save-sheet.hidden{display:none!important}
+.save-sheet h3{margin:0 0 6px;font-size:16px}
+.save-sheet .save-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+</style>
+</head>
+<body>
+<header><div class="shell"><div class="row"><span class="brand">COLDCALL <em>ONETAP</em></span></div><h1>一按就撥號</h1><p class="byline">由 <b>Meko</b> 與她的 AI 好夥伴 Sol（ChatGPT）協作研發 · 單一檔案版</p></div></header>
+<main class="shell full-only">
+<section aria-label="撥號主頁" class="page active" id="pageDial">
+<div class="page-heading"><div><span class="eyebrow">今日工作</span><h2>撥號</h2></div><span class="chip" id="sessionInfo">資料僅存本機</span></div>
+<div class="stats stats-wide"><div class="stat"><strong id="todayCalls">0</strong><span>今日已處理</span></div><div class="stat"><strong id="todayConnected">0</strong><span>今日接通</span></div><div class="stat"><strong id="todayInterested">0</strong><span>今日有興趣</span></div><div class="stat"><strong id="todayNoAnswer">0</strong><span>今日未接</span></div><div class="stat"><strong id="todayDnc">0</strong><span>今日拒絕聯絡</span></div><div class="stat"><strong id="countPending">0</strong><span>待處理</span></div></div>
+<div class="resume-banner" id="resumeBanner"><div class="grow"><strong>已保存上次進度，可繼續撥號</strong><small id="resumeText">尚未有待撥名單。</small></div><span class="chip" id="dueChip">跟進到期 0</span></div>
+<div class="card" id="callCard"><div class="row"><span class="eyebrow">當前聯絡人</span><span class="count-pill" id="position">0 / 0</span></div>
+<div class="gate-notice" id="dialGateNotice" role="status"><div><strong>請先完成合規確認</strong><small>確認名單及拒絕聯絡查核後，才可撥號。</small></div><button class="btn secondary small" id="goCompliance" type="button">前往確認</button></div><div class="number-card"><div class="label" id="currentHint">下一位聯絡人</div><div class="contact-name" aria-live="polite" id="currentName">目前沒有待撥號碼</div><div class="contact-number" id="currentPhone">—</div><div class="progress" id="currentStatus">請先匯入電話名單</div><div class="contact-note hidden" id="currentDetails"></div></div>
+<div class="consent-flag hidden" id="consentNotice" role="status"><strong>未有直接促銷同意紀錄</strong><small>按《個人資料（私隱）條例》第 6A 部，進行直接促銷前須有相關人士的同意，並須備存同意依據。請先核實名單來源及授權，再決定是否撥出。</small></div>
+<div class="divider"></div><div class="row"><span class="eyebrow">通話後記錄結果（擇一）</span></div>
+<div class="result-extras"><div class="result-grid extras-grid">
+<button class="btn ghost" id="skip" type="button">跳過這位</button>
+<button class="btn secondary" id="undo" type="button">撤銷上一步</button>
+<button class="btn secondary" id="editContact" type="button">編輯資料</button>
+</div></div>
+<div class="follow-up-panel hidden" id="followUpPanel">
+<h3 id="followUpTitle">設定跟進日期</h3>
+<p class="helper" id="followUpHint">記錄結果後，可一按設定下次跟進時間；亦可暫不設定，繼續下一位。</p>
+<div class="follow-chips">
+<button class="btn secondary" data-follow="today" type="button">今日稍後</button>
+<button class="btn secondary" data-follow="tomorrow" type="button">明日 10:00</button>
+<button class="btn secondary" data-follow="dayafter" type="button">後日 10:00</button>
+<button class="btn secondary" data-follow="monday" type="button">下星期一</button>
+</div>
+<label class="form-label" for="followUpCustom">自選日期及時間</label>
+<input class="input" id="followUpCustom" type="datetime-local"/>
+<div class="follow-up-actions">
+<button class="btn primary" id="followUpSave" type="button">儲存跟進日期</button>
+<button class="btn ghost" id="followUpSkip" type="button">暫不設定</button>
+</div>
+</div>
+<p class="helper">記錄結果後會自動顯示下一位。選擇「未接聽／已接通／有興趣／約定回電」後可即時設定跟進日期。</p><div class="helper" id="callTip">通話由手機的電話功能處理；通話後請返回本頁選擇結果。</div>
+</div>
+<div class="backup-nudge hidden" id="backupNudge"><div class="grow"><strong>請定期備份本機資料</strong><small id="backupNudgeText">尚未建立備份。建議匯出 JSON 或 Excel，以免清除瀏覽器後遺失。</small></div><button class="btn secondary small" id="goBackup" type="button">前往備份</button></div>
+<div class="card script-box" id="scriptCard"><details><summary>通話提示（可自行修改，只存本機）</summary>
+<label class="form-label" for="callScript">開場白及重點</label>
+<textarea class="input" id="callScript" maxlength="4000" placeholder="可在此貼上你慣用的開場白或公司核准講稿"></textarea>
+<p class="helper">此欄不會隨名單匯出，亦不會上傳。請只使用所屬機構核准的講稿，並先表明身份及來電目的。</p>
+</details></div>
+<div class="card" id="complianceCard"><div class="row"><h3 style="margin:0">使用前合規確認</h3><span class="chip warn" id="complianceState">尚未確認</span></div><p class="helper">請先查核名單來源、所需授權，以及適用的拒絕直接促銷紀錄。今日確認後，於本裝置會保留至當天結束，翌日須再次確認。</p>
+<details id="complianceDetails"><summary>查看完整合規及責任聲明</summary><p>本人確認，在使用本工具進行直接促銷前，已按照適用法律、所屬機構現行規定及內部指引，查核相關客戶的拒絕聯絡紀錄、直接促銷意願及所需授權。</p><p>本人明白，如任何適用紀錄顯示客戶拒絕接收推廣訊息，或拒絕其個人資料被用於直接促銷，均不得向該客戶進行直接促銷聯絡、發送推廣資料或商業電子訊息。</p><p>本人須就名單來源、查核程序、聯絡行為及任何違反適用法律、所屬機構規定或內部指引的行為，自行承擔依法應負的責任。</p><p>本工具僅提供輔助撥號及資料管理功能，不構成直接促銷活動的授權或合規認證。</p></details>
+<label class="agree"><input id="compliance" type="checkbox"/><span>本人確認已完成適用的查核，明白須自行遵守相關法律及機構規定，並對本人獨立作出的違規行為承擔依法應負的責任。</span></label>
+<p class="helper">本確認不取代法律及公司合規程序。<button type="button" class="terms-link" data-open-terms>閱讀完整使用條款及私隱說明</button></p>
+</div>
+<div class="card" id="dialEmptyActions"><h3>開始使用</h3><p class="muted">匯入 Excel、CSV、TXT 名單後即可逐一撥號。</p><button class="btn primary full" data-goto="import">前往匯出匯入</button></div>
+</section>
+<section aria-label="聯絡人與回撥" class="page" id="pageContacts">
+<div class="page-heading"><div><span class="eyebrow">聯絡人管理</span><h2>聯絡人</h2></div><span class="count-pill" id="countTotal">0 筆</span></div>
+<button class="btn primary full" id="addContact" style="margin:5px 0 12px" type="button">＋ 手動新增聯絡人</button>
+<label class="form-label" for="searchContacts">搜尋姓名或電話號碼</label><input autocomplete="off" class="input" id="searchContacts" placeholder="輸入姓名、電話號碼" type="search"/>
+<div aria-label="聯絡人篩選" class="tabs" id="contactFilters" role="group"><button class="selected" data-filter="all" type="button">全部</button><button data-filter="pending" type="button">待撥</button><button data-filter="due" type="button">今日跟進</button><button data-filter="callback" type="button">回撥</button><button data-filter="interested" type="button">有興趣</button><button data-filter="completed" type="button">已處理</button><button data-filter="dnc" type="button">拒絕聯絡</button></div>
+<div class="card" id="callbackSummary"><div class="row"><div><span class="eyebrow">回撥提醒</span><h3 style="margin:3px 0">待安排的回撥</h3></div><span class="chip warn" id="countCallbacks">0 筆</span></div><p class="muted">未接聽及約定回電的聯絡人會保留在回撥清單。系統不會自動重撥。</p></div>
+<div class="list" id="contactList"><div class="empty">尚未匯入聯絡人。</div></div>
+<div class="card" id="dncCard"><div class="row"><div><span class="eyebrow">《私隱條例》第 6A 部</span><h3 style="margin:3px 0">拒絕接收直銷名單</h3></div><span class="chip danger" id="dncCount">0 個號碼</span></div>
+<p class="muted">客戶表示拒絕直接促銷後，必須停止相關推廣，並在本機保留號碼紀錄。此名單會跨批次匯入持續生效，撥號時會自動跳過。</p>
+<div class="list" id="dncList"><div class="empty">尚未有拒絕聯絡號碼。</div></div>
+<label class="form-label" for="dncAddPhone">加入單一號碼</label>
+<input autocomplete="off" class="input" id="dncAddPhone" inputmode="tel" placeholder="例如 91234567 或 +85291234567" type="tel"/>
+<button class="btn secondary full" id="dncAdd" style="margin-top:8px" type="button">加入拒絕名單</button>
+<label class="form-label" for="dncPaste">一次過貼上多個號碼（每行一個）</label>
+<textarea class="input" id="dncPaste" placeholder="61234567&#10;+852 9123 1111" rows="3"></textarea>
+<button class="btn ghost full" id="dncImport" style="margin-top:8px" type="button">匯入拒絕名單</button>
+<p class="helper">誤加的號碼可移除，但請審慎處理；正式拒絕要求應予保留。</p>
+</div>
+<div class="card"><div class="row"><h3 style="margin:0">近期通話紀錄</h3><button class="btn ghost small" id="historyMore" type="button">查看全部</button></div><div class="history" id="history"><p class="muted">尚未有通話紀錄。</p></div></div>
+</section>
+<section aria-label="匯入名單" class="page" id="pageImport">
+<div class="page-heading"><div><span class="eyebrow">智能匯入</span><h2>匯入名單</h2></div></div>
+<div class="steps"><span class="active" id="step1">① 選擇檔案</span><span id="step2">② 預覽資料</span><span id="step3">③ 確認匯入</span></div>
+<div class="card"><h3>選擇 Excel、CSV 或 TXT</h3><p class="muted">系統會在本機分析檔案及電話欄位，並於匯入前顯示預覽。檔案不會上傳至伺服器。</p><label class="form-label" for="importFile">選擇電話名單檔案</label><input accept=".xlsx,.csv,.txt,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv,text/plain" class="input" id="importFile" style="padding:9px" type="file"/><button class="btn primary full" id="analyzeFile" style="margin-top:10px" type="button">分析檔案並預覽</button>
+<details><summary>直接貼上文字名單</summary><label class="form-label" for="paste">每行可包含姓名及電話號碼</label><textarea class="input" id="paste" placeholder="陳先生,91234567
+李小姐,98765432"></textarea><button class="btn secondary full" id="analyzePaste" type="button">分析貼上的內容</button></details><p aria-live="polite" class="helper" id="importInfo" role="status"></p></div>
+<div class="card hidden" id="preview"><span class="eyebrow">匯入前預覽</span><h3>確認識別結果</h3><label class="form-label" for="sheetSelect">選擇工作表</label><select class="input" id="sheetSelect"></select><p class="helper">請核對電話欄位，避免將客戶編號誤認為電話號碼。</p><div id="columnOptions"></div><p class="warning-text helper" id="previewWarning"></p><div class="previewStats"><div><strong id="previewFound">0</strong>識別號碼</div><div><strong id="previewReady">0</strong>可匯入</div><div><strong id="previewExcluded">0</strong>重複／排除</div></div><div class="divider"></div><div class="eyebrow">預覽（最多 8 筆）</div><div id="sampleRows"></div><p class="helper">識別號碼不代表已有直接促銷授權，請自行核實資料來源及使用權限。</p><button class="btn primary full" id="confirmImport" type="button">確認匯入名單</button><button class="btn ghost full" id="cancelImport" style="margin-top:8px" type="button">取消預覽</button></div>
+</section>
+<section aria-label="匯出匯入" class="page" id="pageSettings">
+<div class="page-heading"><div><span class="eyebrow">匯出匯入</span><h2>匯出匯入</h2></div></div>
+<div class="card"><div class="row"><h3 style="margin:0">資料備份</h3><span class="chip" id="storageState">僅存本機</span></div><p class="muted">建議定期匯出備份，避免更換裝置、清除瀏覽器資料或使用私密瀏覽時遺失紀錄。</p><p class="backup-status" id="backupStatus"></p><label class="form-label" for="exportScope">匯出資料範圍</label><select class="input" id="exportScope"><option selected="" value="all">全部資料（完整備份）</option><option value="today">僅今天的紀錄</option></select><p class="helper" id="exportScopeHelp">完整 Excel 備份包含聯絡人、撥號紀錄及拒絕聯絡名單。</p><label class="form-label" for="exportFormat">匯出格式</label><select class="input" id="exportFormat"><option selected="" value="xlsx">Excel 工作簿（.xlsx）</option><option value="json">JSON 完整備份（含設定，推薦還原）</option><option value="csv">CSV（依所選範圍匯出單一表格）</option></select><label class="form-label" for="exportFilename">匯出檔案名稱（可自行修改）</label><input autocomplete="off" class="input" id="exportFilename" maxlength="120" placeholder="ColdCall-OneTap-完整備份-日期" spellcheck="false" type="text"/><p class="helper">不需要輸入副檔名；系統會自動加上 .xlsx、.json 或 .csv。所有時間均為香港時間（Asia/Hong_Kong）。</p><button class="btn primary full" id="export" style="margin-top:10px" type="button">匯出資料</button><p class="helper">Excel 含聯絡人、撥號紀錄、拒絕名單及今日統計；JSON 另含設定及進度，方便完整還原。檔案未經加密，請妥善保管。</p>
+<details id="restoreDetails"><summary>從備份恢復資料（Excel 或 JSON）</summary><p>支援本工具匯出的 Excel 工作簿或 JSON 完整備份。請先預覽，再選擇「合併」或「取代」。不論哪一種，現有拒絕聯絡名單都會保留並與備份合併，不會刪除。</p><label class="form-label" for="backupFile">選擇備份檔</label><input accept=".xlsx,.json,application/json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" class="input" id="backupFile" style="padding:9px" type="file"/><button class="btn secondary full" id="previewRestore" style="margin-top:9px" type="button">預覽可恢復資料</button><div class="hidden" id="restorePreview" style="margin-top:12px"><p class="good" id="restoreInfo"></p><div class="follow-up-actions"><button class="btn primary" id="confirmRestore" type="button">合併備份</button><button class="btn secondary" id="confirmReplace" type="button">以備份取代現有聯絡人及紀錄</button></div><p class="helper">合併會保留現有聯絡人，只加入缺少的紀錄。「取代」會以備份名單及通話紀錄為準，但拒絕聯絡號碼仍然會保留。</p></div></details></div>
+<div class="card"><h3>資料及私隱</h3><p class="muted">本工具不會把名單上傳至中央資料庫。瀏覽器的本機資料未經專用加密，也不會自動同步至其他裝置。</p><button type="button" class="terms-link" data-open-terms>查看使用條款、免責聲明及私隱說明</button><div class="divider"></div><button class="btn danger full" id="reset" type="button">清除全部資料</button><p class="helper">此操作會清除本機內的聯絡人、紀錄和拒絕聯絡名單；清除後無法復原，請先備份。</p></div>
+<p class="foot">ColdCall OneTap · 測試版v2.0.1<br/>工具提供者：Meko Yuen</p>
+</section>
+</main>
+
+</div>
+<div class="dock full-only" id="dialDock"><div class="dock-inner">
+<div class="result-wrap" id="resultSection"><div class="result-grid dock-results">
+<button class="btn secondary result" data-status="no-answer" type="button">未接聽</button>
+<button class="btn secondary result" data-status="connected" type="button">已接通</button>
+<button class="btn secondary result" data-status="interested" type="button">有興趣</button>
+<button class="btn secondary result" data-status="callback" type="button">約定回電</button>
+<button class="btn secondary result" data-status="not-interested" type="button">無興趣</button>
+<button class="btn danger result" data-status="dnc" type="button">拒絕再聯絡</button>
+</div></div>
+<a aria-disabled="true" class="call-action disabled" href="#" id="callBtn" role="button">☎ 撥打這個號碼</a>
+</div></div>
+<nav aria-label="主要導覽" class="bottom-nav full-only"><div class="nav-inner"><button aria-current="page" class="active" data-nav="dial" type="button"><span>☎</span>撥號</button><button data-nav="contacts" type="button"><span>♧</span>聯絡人</button><button data-nav="import" type="button"><span>⇅</span>匯出匯入</button></div></nav>
+<dialog aria-labelledby="editorTitle" class="dialog full-only" id="editorDialog"><div class="row"><h2 id="editorTitle">編輯聯絡人</h2><button class="btn ghost small" id="editorClose" type="button">關閉</button></div><p class="helper" id="editPhone"></p><div class="hidden" id="newPhoneGroup"><label class="form-label" for="newContactPhone">電話號碼（必填）</label><input autocomplete="off" class="input" id="newContactPhone" inputmode="tel" placeholder="例如 91234567 或 +85291234567" type="tel"/><p class="helper">僅支援香港電話號碼，請在新增前核實名單來源與聯絡權限。</p></div><label class="form-label" for="editName">姓名</label><input autocomplete="off" class="input" id="editName" maxlength="120"/><label class="form-label" for="editMeeting">見面時間</label><input class="input" id="editMeeting" type="datetime-local"/><label class="form-label" for="editPlace">見面地點</label><input class="input" id="editPlace" maxlength="240"/><label class="form-label" for="editCallback">回撥時間（選填）</label><input class="input" id="editCallback" type="datetime-local"/><label class="form-label" for="editNotes">其他備註</label><textarea class="input" id="editNotes" maxlength="2500" placeholder="只記錄處理聯絡所需資料"></textarea><div class="editor-actions"><button class="btn primary" id="saveContact" type="button">儲存資料</button><button class="btn secondary" id="cancelContact" type="button">取消</button></div><p class="helper">資料只會儲存在目前瀏覽器，不會自動同步。</p></dialog>
+
+
+<dialog aria-labelledby="termsTitle" class="dialog" id="termsDialog">
+<div class="row"><h2 id="termsTitle">使用條款、免責聲明及私隱說明</h2><button class="btn ghost small" id="termsClose" type="button">關閉</button></div>
+<div class="terms-body"><h1>ColdCall OneTap</h1>
+<h2>使用條款、免責聲明及私隱說明</h2>
+<p><strong>版本：</strong> 測試版v2.0.1</p>
+<p><strong>生效日期：</strong> 待正式發佈時確認</p>
+<p><strong>工具提供者：</strong> Meko Yuen</p>
+<aside class="warning">重要提示：本文件旨在說明本工具的使用條款、免責聲明及私隱安排，現時工具尚未通過正式資訊安全評估。使用者在實際投入使用前，應按其所屬機構的合規及內部審批要求自行核實。</aside>
+<h3>第一條｜工具性質與適用範圍</h3>
+<p>1.1 ColdCall OneTap（下稱「本工具」）是獨立開發的電話名單管理及輔助撥號工具，協助使用者匯入、整理電話號碼、使用裝置原生電話功能發起通話、記錄結果及管理拒絕再聯絡名單。</p>
+<p>1.2 本工具不提供保險、金融、法律或其他專業意見，亦不保證任何銷售、接通或業務成果。</p>
+<p>1.3 本工具不是任何保險公司、保險業監管局、電訊商或其他監管機構的官方產品；除非另有明確書面授權，亦不代表其認可、監督或推薦本工具。</p>
+<p>1.4 本工具的開發曾使用人工智能輔助；此事不代表 OpenAI 或任何人工智能供應商對本工具提供官方背書、認證、技術支援或擔保。</p>
+<p>1.5 使用者在使用前應細閱本條款。不同意者應停止使用本工具。</p>
+<h3>第二條｜使用資格及合法用途</h3>
+<p>2.1 使用者須自行確認具備從事相關業務及電話推廣活動所需的資格、權限與授權。</p>
+<p>2.2 如屬保險中介人、金融從業員或僱員，須先確認使用本工具及處理相關客戶資料符合僱主、委託機構、監管機構及適用合約要求。</p>
+<p>2.3 不得利用本工具進行非法直接促銷、騷擾、欺詐、冒充、誤導或其他侵害第三方權益的活動。</p>
+<p>2.4 未經授權，不得輸入、處理或披露屬於僱主、客戶或第三方的保密資料。</p>
+<h3>第三條｜名單來源與直接促銷</h3>
+<p>3.1 使用者對自行匯入的姓名、電話號碼及其他個人資料之收集、使用、保存及披露負有相應法律責任。</p>
+<p>3.2 如使用可識別個人的資料作直接促銷，使用者須符合香港《個人資料（私隱）條例》（第486章）及其他適用法例，包括法定通知、同意及停止使用要求。</p>
+<p>3.3 必須在適用法律要求的情況下取得有效同意或具備適用的合法處理依據；單靠工具的勾選框、匯入成功或資料來源欄位，均不能證明已取得同意。</p>
+<p>3.4 從第三方購入、獲轉介、下載或交換的名單，不會因本工具接受匯入而自動被視為合法或獲授權。</p>
+<p>3.5 使用者應按適用法律及機構政策保存來源、通知、同意及授權依據，並在需要時核實有關紀錄。</p>
+<h3>第四條｜撥號及專業合規</h3>
+<p>4.1 使用者應遵守適用的法律、監管規則、行業守則、電訊條款與公司政策，包括電話時段、頻率、身份披露及禁止重複滋擾等要求。</p>
+<p>4.2 聯絡他人時須依照適用要求清楚交代身份、代表機構及來電目的，並避免虛假、誤導或具欺騙性的陳述。</p>
+<p>4.3 使用者不得利用本工具規避電訊商、監管機構或接聽者的限制及拒絕聯絡要求。</p>
+<h3>第五條｜拒絕再聯絡</h3>
+<p>5.1 「拒絕再聯絡」及相關記錄功能僅供輔助，不保證自動識別所有已撤回同意、跨平台拒絕名單或其他禁止聯絡情況。</p>
+<p>5.2 目前各使用者的本機拒絕聯絡資料不會自動與同事、其他裝置或機構中央名單同步。使用者仍須按照法律及公司要求核對最新的拒絕聯絡紀錄。</p>
+<p>5.3 回撥清單僅供使用者自行管理未接聽與約定回電的聯絡人，不會自動撥出。使用者在重新列入待撥之前，仍須按適用要求查核聯絡授權與拒絕聯絡紀錄。</p>
+<p>5.4 接獲停止直接促銷要求後，使用者須及時依法及按照機構程序處理，不得僅以在本工具內標記作為已履行全部責任的證明。</p>
+<h3>第六條｜資料儲存及私隱說明</h3>
+<p>6.1 <strong>按目前提供的程式設計</strong>，使用者匯入的聯絡名單、撥號狀態、歷史紀錄與拒絕聯絡名單，透過其瀏覽器的 <code>localStorage</code> 於該裝置本機儲存。</p>
+<p>6.2 目前版本並無設計把完整客戶名單主動上傳至中央客戶資料庫；此描述只適用於經核對的版本，不保證日後修改版或遭入侵的網站具有相同行為。</p>
+<p>6.3 Cloudflare 等網站託管服務仍可能處理 IP 位址、網站存取時間、連線資訊或必要的技術日誌；這些資訊與使用者匯入的完整客戶名單並不相同。</p>
+<p>6.4 <strong>目前本機名單沒有專用加密保護。</strong> 能操作已解鎖裝置或能在同一網站來源執行程式碼的人，在某些情況下可能讀取資料。瀏覽器、裝置或網站帳號被入侵亦可能造成洩漏。</p>
+<p>6.5 使用者須依適用法律及機構政策保護裝置、帳號、匯出檔案及備份，避免將含個人資料的 CSV 放在公開連結或未經授權的共享空間。</p>
+<p>6.6 如日後增加雲端同步、第三方分析、錄音或其他會實質改變個人資料處理安排的功能，提供者須檢視是否需要更新私隱通知並履行適用法定要求。</p>
+<h3>第七條｜保留、備份與刪除</h3>
+<p>7.1 使用者須按照適用法律及機構政策決定個人資料的適當保留期限，避免不必要的長期保留。</p>
+<p>7.2 私密瀏覽模式、清除網站資料、裝置或瀏覽器故障、系統升級等情況，可能導致本機資料永久遺失。</p>
+<p>7.3 提供者不保證本機資料可永久保存或能夠復原。使用者須自行管理備份與資料安全。</p>
+<p>7.4 清除本機資料不會自動清除其他裝置、已匯出的 CSV 或 Excel、雲端備份或第三方持有的副本。</p>
+<h3>第八條｜撥號技術限制</h3>
+<p>8.1 本工具透過裝置支援的原生電話功能發起通話，並不直接控制電訊商網絡或 iPhone 系統的 SIM／eSIM 選線邏輯。</p>
+<p>8.2 本工具不保證必定撥通、能直接選擇特定 SIM／eSIM、免除 iOS 系統確認或在所有裝置上正常運作。</p>
+<p>8.3 「已按撥號」或其他內部狀態不等同電訊商確認電話已接通；使用者應按實際情況記錄結果。</p>
+<p>8.4 任何本地、長途、漫遊或其他通話費用，均依使用者與電訊商的服務合約處理。</p>
+<h3>第九條｜錄音</h3>
+<p>9.1 目前本工具不會直接擷取、錄製或儲存 iPhone 原生通話的音訊。</p>
+<p>9.2 如使用者使用裝置內置功能或第三方服務錄音，須自行確保相關通知、同意（如適用）、私隱保護、保存期限及公司政策符合要求。</p>
+<p>9.3 本工具並不因此承擔使用者自行錄音服務的操作、資料保管或合規職責。</p>
+<h3>第十條｜服務狀態及不保證事項</h3>
+<p>10.1 本工具按其現有狀態及實際可用情況提供，可能出現中斷、資料遺失、匯入錯誤、重複號碼、兼容或安全問題。</p>
+<p>10.2 提供者不保證本工具滿足特定企業的資訊安全標準、全部監管要求或使用者的特定商業目的。</p>
+<p>10.3 本工具不保證任何撥號數量、接通率、客戶回覆、成交率或收益。</p>
+<h3>第十一條｜使用者責任</h3>
+<p>11.1 使用者對其選擇的聯絡對象、個人資料使用、通話內容、商業決策及銷售活動自行承擔依法應負的責任。</p>
+<p>11.2 使用者須遵守法律、公司政策、保密義務及專業操守；發現疑似資料外洩時，應按照適用規定和機構程序處理。</p>
+<h3>第十二條｜提供者責任及限制</h3>
+<p>12.1 在法律允許且合理有效的範圍內，提供者不對使用者的非法推廣、未經授權資料使用、虛假陳述或違反僱主政策的行為承擔由該等行為直接造成的責任。</p>
+<p>12.2 在適用法律允許及合理的範圍內，對於因第三方電訊服務、裝置故障、瀏覽器限制及其他超出提供者合理控制範圍的事件導致的損失，提供者的責任可能受到限制。</p>
+<p>12.3 對於間接或相應損失、利潤及商業機會損失，任何限制均須符合適用法律及合理性要求。</p>
+<p>12.4 <strong>本條款不排除或限制依法不得排除或限制的責任，亦不免除提供者因自身違法、過失或其他依法須承擔的責任。</strong> 有關條款的法律效力受香港《管制免責條款條例》（第71章）及其他適用法律約束。</p>
+<h3>第十三條｜第三方投訴及索償</h3>
+<p>13.1 如使用者違反本條款或法律而引發投訴或索償，須自行處理其依法應負的責任。</p>
+<p>13.2 在法律允許的範圍內，提供者可就使用者違反本條款而直接引致、可合理證明的損失尋求適當補償；不包括由提供者自身違法或過失造成的損失。</p>
+<p>13.3 本條不妨礙資料當事人或其他第三方依法享有的權利。</p>
+<h3>第十四條｜知識產權及使用授權</h3>
+<p>14.1 本工具的名稱、界面、原創文字及其他內容可能受提供者或第三方的知識產權保護；第三方元件仍受各自授權條款約束。</p>
+<p>14.2 在未另訂授權條款前，獲准使用者可於合法、非轉售及遵守本條款的情況下使用工具；不得冒稱官方產品或未經授權大量再分發、轉售或移除應保留的權利聲明。</p>
+<p>14.3 任何版權主張僅限於提供者依法實際享有的權利，並不覆蓋屬於第三方的程式或素材。</p>
+<h3>第十五條｜修改、暫停及終止</h3>
+<p>15.1 提供者可因安全、維護、違法使用風險或其他合理理由修改、暫停或停止本工具；但應在適用法律要求或合理可行的情況下作適當通知。</p>
+<p>15.2 不保證本工具永久免費、持續更新或無間斷提供。終止使用後，使用者仍須依法管理已有資料及備份。</p>
+<h3>第十六條｜條款修訂</h3>
+<p>16.1 提供者可因功能、營運及法律要求更新條款；如涉及重大變更，應按適用法律採取合理通知或重新取得同意的措施。</p>
+<p>16.2 修訂不得追溯剝奪使用者依法享有的權利或排除不可免除的法定責任。</p>
+<h3>第十七條｜適用法律及爭議處理</h3>
+<p>17.1 在強制性法律規定容許下，本條款受香港特別行政區法律管轄。</p>
+<p>17.2 雙方應先以合理方式處理爭議；無法解決時，可向具有適當司法管轄權的香港法院提出，但不妨礙依法享有的其他救濟。</p>
+<p>17.3 如個別條款被認定無效，其餘條款在法律允許的範圍內繼續適用。</p>
+<h3>第十八條｜使用前的重要確認</h3>
+<p>使用者開始使用本工具前，應理解以下事項：</p>
+<p class="bullet">• 本工具並非任何保險公司、監管機構或 OpenAI 官方認可的系統；</p>
+<p class="bullet">• 使用者須自行核實名單來源、直接促銷授權及所屬機構要求；</p>
+<p class="bullet">• 本機名單未經專用加密，裝置或網站遭入侵可能造成資料外洩；</p>
+<p class="bullet">• 拒絕聯絡紀錄不會自動跨使用者或裝置同步；</p>
+<p class="bullet">• 本工具的撥號及紀錄功能有系統限制，不能代替法定或公司合規程序；</p>
+<p class="bullet">• 如不同意本條款，應停止使用。</p>
+<h3>第十九條｜直接促銷合規確認</h3>
+<p>19.1 使用者在使用本工具進行直接促銷前，應按照適用法律、所屬機構現行規定及內部指引，查核相關客戶的拒絕聯絡紀錄、直接促銷意願及所需授權。</p>
+<p>19.2 如任何適用紀錄顯示客戶拒絕接收推廣訊息，或拒絕其個人資料被用於直接促銷，使用者不得向該客戶進行直接促銷聯絡、發送推廣資料或商業電子訊息。</p>
+<p>19.3 使用者須就名單來源、查核程序、聯絡行為及任何違反適用法律、所屬機構規定或內部指引的行為，自行承擔依法應負的責任。</p>
+<p>19.4 本工具僅提供輔助撥號及資料管理功能，並不構成對任何直接促銷活動的合規認證、授權或批准。</p>
+<h3>第二十條｜雙版本資料隔離</h3>
+<p>20.1 本工具提供「洋蔥版」及「完全版」兩種操作模式。兩個模式分別使用不同的瀏覽器本機儲存項目，不會自動互相讀取、匯入、同步或合併電話名單及相關紀錄。</p>
+<p>20.2 兩個版本均支援匯入聯絡人、逐一撥號、記錄通話結果、編輯聯絡人資料及匯出備份。完全版額外提供手動新增聯絡人、較完整的回撥管理，以及按當地日期篩選今日紀錄的功能。</p>
+<p>20.3 洋蔥版的「清除通話紀錄」只清除洋蔥版的通話歷史；「清除所有聯絡人」只清除洋蔥版名單並保留歷史及拒絕聯絡紀錄。完全版的清除功能不會清除洋蔥版資料。</p>
+<p>20.4 任何模式的本機拒絕聯絡紀錄均不會跨模式、跨裝置或與所屬機構的正式拒絕聯絡名單自動同步，使用者須自行履行適用的查核及處理責任。</p>
+<hr>
+<p><strong>ColdCall OneTap</strong></p>
+<p><strong>工具提供者：Meko Yuen</strong></p>
+<p><strong>作品署名：由 Meko 與她的 AI 好夥伴 Sol（ChatGPT）協作研發。</strong></p>
+<p><strong>© 2026 Meko Yuen；權利保留範圍以適用法律及第三方授權為準。</strong></p>
+<footer>測試版v2.0.1 · Meko Yuen</footer></div>
+</dialog>
+<div class="save-sheet hidden" id="saveSheet" role="dialog" aria-labelledby="saveSheetTitle">
+<h3 id="saveSheetTitle">儲存匯出檔案</h3>
+<p class="helper">部分流動裝置（尤其 iPhone 的 Safari）未必支援直接下載。請用以下其中一個方法手動儲存。分享功能只會在你按下後才啟動，本工具不會自動向外傳送資料。</p>
+<p class="muted">檔案名稱：<b id="saveSheetName"></b></p>
+<div class="save-actions">
+<button class="btn primary" id="saveSheetOpen" type="button">開啟檔案</button>
+<button class="btn secondary hidden" id="saveSheetShare" type="button">分享或儲存到檔案</button>
+</div>
+<button class="btn ghost full" id="saveSheetDismiss" style="margin-top:8px" type="button">關閉</button>
+</div>
+<div aria-live="polite" class="toast hidden" id="toast" role="status"></div>
+<script>/* ColdCall OneTap 測試版 v2.0.1 - local-only spreadsheet and text importer.
+ * No network requests. XLSX is parsed with native browser DecompressionStream / DOMParser.
+ * Supports standard unencrypted OOXML .xlsx, CSV and TXT. */
+(function(root){
+'use strict';
+const MAX_ROWS=15000, MAX_COLS=100, MAX_XML_BYTES=20*1024*1024;
+const phoneHeader=/^(?:電話|電話號碼|手機|手機號碼|手提|聯絡電話|聯絡號碼|聯絡手機|手機電話|mobile|mobile\s*(?:no\.?|number|phone)?|phone|phone\s*(?:no\.?|number)?|telephone|tel\.?|tel\s*(?:no\.?|number)?|contact\s*(?:no\.?|number|phone)?|whatsapp|wa\s*number|客戶電話)$/i;
+const nameHeader=/^(?:姓名|名字|客戶|客戶姓名|客戶名稱|聯絡人|稱呼|name|customer|customer\s*name|contact\s*name)$/i;
+const consentHeader=/^(?:consent|聯絡授權|同意|直接促銷同意|dm\s*consent)$/i;
+const evidenceHeader=/^(?:evidence|來源|授權依據|同意證據|source|consent\s*evidence)$/i;
+const negativeHeader=/(?:身份證|hkid|id\s*(?:number|no\.?|code)?|客戶編號|編號|account|保單|policy|amount|金額|總額|日期|date|birthday|生日|reference|ref\.?|郵編|郵遞區號|zip|postcode|postal)/i;
+function trim(v){return String(v??'').trim();}
+function normalizedHeader(v){return trim(v).toLowerCase().replace(/[\s_\-:：]+/g,' ').trim();}
+function fullPhone(raw){let s=trim(raw);
+ if(/^[+-]?(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)$/.test(s.replace(/,/g,''))){const n=Number(s.replace(/,/g,''));if(Number.isSafeInteger(n))s=String(n);}
+ s=s.replace(/\.0+$/,'');
+ s=s.replace(/[\s\-()（）.\u3000／/]/g,'');
+ if(/^00852/.test(s))s='+852'+s.slice(5);
+ else if(/^00\d/.test(s))s='+'+s.slice(2);
+ if(/^0[2356789]\d{7}$/.test(s))s=s.slice(1);
+ if(/^[2356789]\d{7}$/.test(s))return '+852'+s;
+ if(/^852[2356789]\d{7}$/.test(s))return '+'+s;
+ if(/^\+852[2356789]\d{7}$/.test(s))return s;
+ return '';}
+function phonesInCell(raw){const val=trim(raw);if(!val)return [];
+ const direct=fullPhone(val);if(direct)return [direct];
+ // Scan surrounding text, but do not match a substring inside an unrelated long numeric identifier.
+ const re=/(?:^|[^\d])((?:(?:(?:00|\+)852|0)?[\s().-]?)?[2356789]\d{3}[\s().-]?\d{4})(?=$|[^\d])/g;
+ const result=[];let m;while((m=re.exec(val))!==null){const n=fullPhone(m[1]);if(n&&!result.includes(n))result.push(n);if(result.length>=5)break;}
+ return result;
+}
+function parseDelimited(text, delimiter){let rows=[],row=[],f='',quoted=false;
+ for(let i=0;i<text.length;i++){const c=text[i];if(c==='"'){if(quoted&&text[i+1]==='"'){f+='"';i++;}else if(!f||quoted)quoted=!quoted;else f+=c;}else if(c===delimiter&&!quoted){row.push(f);f='';}else if((c==='\n'||c==='\r')&&!quoted){if(c==='\r'&&text[i+1]==='\n')i++;row.push(f);f='';if(row.some(x=>trim(x)))rows.push(row);row=[];if(rows.length>MAX_ROWS)throw Error('資料超過 '+MAX_ROWS+' 行，請分批匯入。');}else f+=c;}
+ if(quoted)throw Error('CSV 的引號未成對，請先檢查檔案。');row.push(f);if(row.some(x=>trim(x)))rows.push(row);return rows;
+}
+function chooseDelimiter(s){const first=s.split(/\r?\n/,1)[0]||'';const hits=[',','\t',';'].map(d=>({d,n:first.split(d).length-1})).sort((a,b)=>b.n-a.n);return hits[0].n>0?hits[0].d:null;}
+function parseText(text,kind){const cleaned=String(text||'').replace(/^\ufeff/,'').trim();if(!cleaned)throw Error('檔案沒有內容');let rows=[];
+ const delim=kind==='txt'?(chooseDelimiter(cleaned)||null):(chooseDelimiter(cleaned)||',');
+ if(delim)rows=parseDelimited(cleaned,delim);else rows=cleaned.split(/\r?\n/).map(x=>[x.trim()]).filter(r=>r[0]);
+ return [{name:kind==='txt'?'文字名單':'CSV 名單',rows}];
+}
+function byTag(parent,local){return Array.from(parent.getElementsByTagNameNS('*',local));}
+function child(parent,local){return Array.from(parent.children||[]).find(x=>x.localName===local)||null;}
+function xmlDoc(text){const doc=new DOMParser().parseFromString(text,'application/xml');if(doc.querySelector('parsererror'))throw Error('Excel XML 內容無法解析');return doc;}
+function attr(n,s){return n.getAttribute(s)||'';}
+function zipEntries(u8){const v=new DataView(u8.buffer,u8.byteOffset,u8.byteLength),sz=u8.length;let end=-1;
+ for(let p=sz-22;p>=Math.max(0,sz-65557);p--){if(v.getUint32(p,true)===0x06054b50){end=p;break;}}
+ if(end<0)throw Error('不是有效的 XLSX ZIP 結構');if(v.getUint16(end+4,true)!==0||v.getUint16(end+6,true)!==0)throw Error('不支援多分卷 Excel');
+ const n=v.getUint16(end+10,true),central=v.getUint32(end+16,true);if(n>=65535||central===0xffffffff)throw Error('暫不支援 ZIP64 Excel');if(n>2000)throw Error('Excel 內容過於複雜');
+ let off=central;const entries=new Map(),dec=new TextDecoder('utf-8');for(let i=0;i<n;i++){
+  if(off+46>sz||v.getUint32(off,true)!==0x02014b50)throw Error('Excel ZIP 目錄損壞');
+  const flags=v.getUint16(off+8,true),method=v.getUint16(off+10,true),comp=v.getUint32(off+20,true),uncomp=v.getUint32(off+24,true),nameLen=v.getUint16(off+28,true),extra=v.getUint16(off+30,true),comment=v.getUint16(off+32,true),loc=v.getUint32(off+42,true);const name=dec.decode(u8.subarray(off+46,off+46+nameLen));
+  if(flags&1)throw Error('不支援加密 Excel，請先移除密碼保護');
+  if(uncomp>MAX_XML_BYTES)throw Error('Excel 有過大的內容');
+  if(name.startsWith('xl/'))entries.set(name,{method,comp,uncomp,loc});
+  off+=46+nameLen+extra+comment;
+ }return {entries,v,u8};
+}
+async function readZip(zip,path){const e=zip.entries.get(path);if(!e)return null;const {v,u8}=zip;
+ if(v.getUint32(e.loc,true)!==0x04034b50)throw Error('Excel 壓縮內容損壞');const nl=v.getUint16(e.loc+26,true),el=v.getUint16(e.loc+28,true),start=e.loc+30+nl+el;
+ if(start+e.comp>u8.length)throw Error('Excel 檔案內容不完整');const raw=u8.subarray(start,start+e.comp);
+ let data;if(e.method===0){data=raw;}else if(e.method===8){if(typeof DecompressionStream==='undefined')throw Error('瀏覽器版本過舊，未支援 Excel 解壓');const ds=new DecompressionStream('deflate-raw');const stream=new Blob([raw]).stream().pipeThrough(ds);data=new Uint8Array(await new Response(stream).arrayBuffer());}else throw Error('Excel 使用暫不支援的壓縮格式');
+ if(data.length>MAX_XML_BYTES)throw Error('Excel 內容超過安全上限');return new TextDecoder('utf-8').decode(data);
+}
+function resolvePath(base,target){let t=target.replace(/\\/g,'/');if(t.startsWith('/'))t=t.slice(1);else t=base.split('/').slice(0,-1).concat(t.split('/')).join('/');const a=[];for(const p of t.split('/')){if(p==='..')a.pop();else if(p&&p!=='.')a.push(p);}return a.join('/');}
+function xlsxCellText(c,strings){const typ=attr(c,'t');if(typ==='inlineStr'){const i=child(c,'is');return i?byTag(i,'t').map(t=>t.textContent).join(''):'';}
+ const v=child(c,'v');if(!v)return '';const value=v.textContent;
+ if(typ==='s')return strings[Number(value)]??'';if(typ==='b')return value==='1'?'TRUE':'FALSE';
+ // Excel often serializes integer telephone numbers using scientific notation.
+ // Convert only safe integral numbers (not dates / arbitrary long identifiers).
+ if((!typ||typ==='n')&&/^[+-]?(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)?$/.test(value)){const n=Number(value);if(Number.isSafeInteger(n))return String(n);}
+ return value;
+}
+function worksheetRows(doc,strings){let out=[];const data=byTag(doc,'sheetData')[0];if(!data)return out;
+ let cursor=0;for(const row of Array.from(data.children).filter(x=>x.localName==='row')){const values=[];let idx=0;for(const c of Array.from(row.children).filter(x=>x.localName==='c')){const ref=attr(c,'r').match(/^([A-Z]+)\d+$/);if(ref){idx=0;for(const ch of ref[1])idx=idx*26+(ch.charCodeAt(0)-64);idx--;}
+ if(idx<MAX_COLS)values[idx]=xlsxCellText(c,strings);idx++;}
+ if(values.some(x=>trim(x))){out.push(values);cursor++;if(cursor>MAX_ROWS)throw Error('Excel 工作表超過 '+MAX_ROWS+' 行，請分批匯入。');}
+ }return out;
+}
+async function parseXLSX(ab){const zip=zipEntries(new Uint8Array(ab));const wb=await readZip(zip,'xl/workbook.xml');if(!wb)throw Error('找不到 Excel 工作簿資料');const rel=await readZip(zip,'xl/_rels/workbook.xml.rels');if(!rel)throw Error('找不到 Excel 工作表關係資料');
+ const relation={};for(const r of byTag(xmlDoc(rel),'Relationship'))relation[attr(r,'Id')]=attr(r,'Target');
+ let ss=[];const s=await readZip(zip,'xl/sharedStrings.xml');if(s){const doc=xmlDoc(s);ss=byTag(doc,'si').map(si=>byTag(si,'t').map(t=>t.textContent).join(''));if(ss.length>250000)throw Error('Excel 字串過多');}
+ const sheets=[];for(const sht of byTag(xmlDoc(wb),'sheet')){if(attr(sht,'state')==='hidden'||attr(sht,'state')==='veryHidden')continue;
+ const id=attr(sht,'r:id'),target=relation[id],name=attr(sht,'name')||'工作表';if(!target)continue;const path=resolvePath('xl/workbook.xml',target);
+ if(!/^xl\/worksheets\/[^/]+\.xml$/.test(path))continue;const content=await readZip(zip,path);if(content){const rows=worksheetRows(xmlDoc(content),ss);if(rows.length)sheets.push({name,rows});}}
+ if(!sheets.length)throw Error('沒有找到可匯入的 Excel 工作表');return sheets;
+}
+function colLetter(i){let s='';for(i++;i;i=Math.floor((i-1)/26))s=String.fromCharCode(65+(i-1)%26)+s;return s;}
+function readHeaders(rows){
+ // Find explicit column headers even when a company title occupies the first few Excel rows.
+ for(let i=0;i<Math.min(rows.length,8);i++){
+   const row=rows[i]||[];
+   if(row.some(v=>phoneHeader.test(normalizedHeader(v))))return {header:true,headerRow:i,labels:row};
+ }
+ const first=rows[0]||[],second=rows[1]||[];
+ const known=first.some(v=>nameHeader.test(normalizedHeader(v))||consentHeader.test(normalizedHeader(v))||evidenceHeader.test(normalizedHeader(v))||negativeHeader.test(normalizedHeader(v)));
+ const firstLooksNumeric=first.filter(v=>phonesInCell(v).length).length;
+ const inferred=known||(firstLooksNumeric===0&&first.some(v=>/[a-zA-Z\u3400-\u9fff]/.test(trim(v)))&&second.some(v=>phonesInCell(v).length));
+ return {header:inferred,headerRow:inferred?0:-1,labels:inferred?first:[]};
+}
+function inspectSheet(sheet){const rows=sheet.rows||[],head=readHeaders(rows),from=head.header?head.headerRow+1:0;
+ const maxcols=Math.min(MAX_COLS,Math.max(0,...rows.slice(0,100).map(r=>r.length)));
+ const columns=[];
+ for(let i=0;i<maxcols;i++){
+  const label=trim(head.labels[i])||colLetter(i)+' 欄',norm=normalizedHeader(label);
+  let valid=0,filled=0,samples=[];for(const row of rows.slice(from,Math.min(rows.length,from+300))){const v=trim(row[i]);if(v){filled++;const p=phonesInCell(v);if(p.length){valid++;if(samples.length<2)samples.push(p[0]);}}}
+  if(!valid)continue;
+  const named=phoneHeader.test(norm),negative=negativeHeader.test(norm)||nameHeader.test(norm)||consentHeader.test(norm)||evidenceHeader.test(norm);
+  const ratio=valid/Math.max(filled,1),score=(named?100:0)+(negative?-100:0)+Math.min(35,ratio*35)+Math.min(valid,15);
+  // High confidence when named telephone column, or essentially a phone-only column with enough samples.
+  const suggested=!negative&&(named||(ratio>=.75&&valid>=2&&!head.header)||(ratio>=.93&&valid>=3&&head.header));
+  columns.push({index:i,label,valid,filled,score,suggested,samples,negative,ratio});
+ }
+ columns.sort((a,b)=>b.score-a.score);
+ // If multiple columns look like phones we do not implicitly conflate them with customer IDs.
+ const identified=columns.filter(c=>c.suggested);
+ if(identified.length>2&&!identified.some(c=>phoneHeader.test(normalizedHeader(c.label)))){
+  // Ambiguous multi-column datasets require explicit user selection.
+  columns.forEach(c=>{c.suggested=false;});
+ }
+ const headers=(head.labels||[]).map(normalizedHeader);
+ return {name:sheet.name,rows,header:head.header,start:from,columns,
+ nameCol:headers.findIndex(x=>nameHeader.test(x)),consentCol:headers.findIndex(x=>consentHeader.test(x)),evidenceCol:headers.findIndex(x=>evidenceHeader.test(x)),
+ isAmbiguous:columns.filter(c=>c.suggested).length===0};
+}
+function recordsFromAnalysis(a,selected){const chosen=new Set(selected||[]),records=[],usedInFile=new Set();let blank=0,duplicates=0;
+ for(let ri=a.start;ri<a.rows.length;ri++){const row=a.rows[ri];for(const i of chosen){const phones=phonesInCell(row[i]);if(!phones.length){blank++;continue;}for(const phone of phones){if(usedInFile.has(phone)){duplicates++;continue;}usedInFile.add(phone);
+ let name=a.nameCol>=0?trim(row[a.nameCol]):'';
+ if(!name&&row.length===2){const j=i===0?1:0;if(!phonesInCell(row[j]).length)name=trim(row[j]);}
+ let consent=a.consentCol>=0?trim(row[a.consentCol]):'',evidence=a.evidenceCol>=0?trim(row[a.evidenceCol]):'';
+ records.push({name,phone,consent,evidence,sourceSheet:a.name,sourceRow:ri+1});}}
+ }
+ return {records,duplicates,unmatched:blank};
+}
+async function loadFile(file){const n=file.name.toLowerCase(),ext=n.split('.').pop();if(!['xlsx','csv','txt'].includes(ext))throw Error('只支援 .xlsx、.csv、.txt。舊版 .xls 請另存成 .xlsx');
+ if(file.size>(ext==='xlsx'?9*1024*1024:3*1024*1024))throw Error('檔案太大。Excel 上限 9MB，CSV/TXT 上限 3MB');
+ if(ext==='xlsx')return (await parseXLSX(await file.arrayBuffer())).map(inspectSheet);
+ let text=await file.text();if(text.includes('\uFFFD')&&ext==='csv')throw Error('文字編碼可能不是 UTF-8，請把 CSV 另存 UTF-8 後重試');
+ return parseText(text,ext).map(inspectSheet);
+}
+root.ColdCallImport={fullPhone,phonesInCell,parseText,parseXLSX,inspectSheet,recordsFromAnalysis,loadFile};
+})(typeof window==='object'?window:globalThis);
+/* ColdCall OneTap - local-only XLSX workbook generator.
+ * Creates an OOXML workbook in the browser; no external library or network requests.
+ * File format: ordinary ZIP with stored (uncompressed) entries for wide compatibility.
+ */
+(function(root){
+'use strict';
+const encoder=new TextEncoder();
+function xml(v){return String(v??'').replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\uFFFE\uFFFF]/g,'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));}
+function col(n){let v='';for(n++;n;n=Math.floor((n-1)/26))v=String.fromCharCode(65+(n-1)%26)+v;return v;}
+function sheetXml(rows,widths){
+ let body='';
+ for(let i=0;i<rows.length;i++){
+  const cells=(rows[i]||[]).map((v,j)=>`<c r="${col(j)}${i+1}" s="${i===0?1:0}" t="inlineStr"><is><t xml:space="preserve">${xml(v)}</t></is></c>`).join('');
+  body+=`<row r="${i+1}"${i===0?' ht="25" customHeight="1"':''}>${cells}</row>`;
+ }
+ const cols=(widths||[]).map((w,i)=>`<col min="${i+1}" max="${i+1}" width="${w}" customWidth="1"/>`).join('');
+ const last=col(Math.max(0,(rows[0]||[]).length-1));
+ return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><dimension ref="A1:${last}${Math.max(1,rows.length)}"/><sheetViews><sheetView workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews><sheetFormatPr defaultRowHeight="18"/><cols>${cols}</cols><sheetData>${body}</sheetData><autoFilter ref="A1:${last}${Math.max(1,rows.length)}"/></worksheet>`;
+}
+const styles=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><fonts count="2"><font><sz val="11"/><name val="Aptos"/></font><font><b/><sz val="11"/><color rgb="FFFFFFFF"/><name val="Aptos"/></font></fonts><fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FF203A43"/><bgColor indexed="64"/></patternFill></fill></fills><borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="2"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFill="1" applyFont="1"/></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>`;
+function crc32(bytes){let crc=0xFFFFFFFF;for(const b of bytes){crc^=b;for(let k=0;k<8;k++)crc=(crc>>>1)^((crc&1)?0xEDB88320:0);}return (crc^0xFFFFFFFF)>>>0;}
+function u16(a,i,v){a[i]=v&255;a[i+1]=v>>>8&255;}
+function u32(a,i,v){a[i]=v&255;a[i+1]=v>>>8&255;a[i+2]=v>>>16&255;a[i+3]=v>>>24&255;}
+function zipFiles(files){const chunks=[],central=[];let pos=0;
+ for(const [name,contents] of files){const n=encoder.encode(name),d=encoder.encode(contents),crc=crc32(d);
+  const local=new Uint8Array(30+n.length);u32(local,0,0x04034b50);u16(local,4,20);u16(local,6,0x0800);u16(local,8,0);u32(local,14,crc);u32(local,18,d.length);u32(local,22,d.length);u16(local,26,n.length);local.set(n,30);
+  chunks.push(local,d);
+  const cd=new Uint8Array(46+n.length);u32(cd,0,0x02014b50);u16(cd,4,20);u16(cd,6,20);u16(cd,8,0x0800);u16(cd,10,0);u32(cd,16,crc);u32(cd,20,d.length);u32(cd,24,d.length);u16(cd,28,n.length);u32(cd,42,pos);cd.set(n,46);central.push(cd);
+  pos+=local.length+d.length;
+ }
+ const centralSize=central.reduce((s,b)=>s+b.length,0),end=new Uint8Array(22);u32(end,0,0x06054b50);u16(end,8,files.length);u16(end,10,files.length);u32(end,12,centralSize);u32(end,16,pos);
+ const out=new Uint8Array(pos+centralSize+end.length);let offset=0;for(const c of [...chunks,...central,end]){out.set(c,offset);offset+=c.length;}return out;
+}
+function build(sheets){if(!Array.isArray(sheets)||!sheets.length)throw Error('沒有可匯出的工作表');
+ const wbSheets=sheets.map((s,i)=>`<sheet name="${xml(s.name)}" sheetId="${i+1}" r:id="rId${i+1}"/>`).join('');
+ const wb=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><bookViews><workbookView/></bookViews><sheets>${wbSheets}</sheets></workbook>`;
+ const rels=sheets.map((s,i)=>`<Relationship Id="rId${i+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet${i+1}.xml"/>`).join('')+`<Relationship Id="rId${sheets.length+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>`;
+ const contentTypes=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>${sheets.map((s,i)=>`<Override PartName="/xl/worksheets/sheet${i+1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join('')}</Types>`;
+ const files=[['[Content_Types].xml',contentTypes],['_rels/.rels',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`],['xl/workbook.xml',wb],['xl/_rels/workbook.xml.rels',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${rels}</Relationships>`],['xl/styles.xml',styles]];
+ sheets.forEach((s,i)=>files.push([`xl/worksheets/sheet${i+1}.xml`,sheetXml(s.rows,s.widths)]));
+ return zipFiles(files);
+}
+root.ColdCallExport={build};
+})(typeof window==='object'?window:globalThis);
+/* ColdCall OneTap 測試版 v2.0.1 — 本機離線，不連網。 */
+(()=>{'use strict';
+const KEY='coldcall-onetap-v1'; // 沿用舊鍵，保留既有客戶資料
+const LAST_BACKUP_KEY='coldcall-onetap-last-backup';
+const COMPLIANCE_KEY='coldcall-onetap-compliance-day';
+const SCRIPT_KEY='coldcall-onetap-call-script-v2';
+const PAGE_KEY='coldcall-onetap-last-page-v2';
+const $=id=>document.getElementById(id);
+const statuses={pending:'待撥',dialing:'已按撥號（待確認）',skipped:'已跳過','no-answer':'未接聽',connected:'已接通',interested:'有興趣',callback:'約定回電','not-interested':'無興趣',dnc:'拒絕聯絡'};
+const reverseStatus=Object.fromEntries(Object.entries(statuses).map(([k,v])=>[v,k]));
+const validStatus=new Set(Object.keys(statuses));
+const callbackStates=new Set(['no-answer','callback']);
+const followUpStatuses=new Set(['no-answer','connected','interested','callback']);
+const consentOk=new Set(['confirmed','yes','true','y','有','已確認','已同意','同意']);
+let state={list:[],history:[],blocked:[],blockedMeta:{}}, undoStack=[], savedOK=true;
+let page='dial', contactFilter='all', editingPhone=null, creatingContact=false, showingAllHistory=false;
+let pendingSheets=[],selectedSheet=0,selectedColumns=new Set(),restoreData=null,followTarget=null;
+const $all=(s)=>[...document.querySelectorAll(s)];
+function isoNow(){return new Date().toISOString();}
+function clean(raw){return window.ColdCallImport.fullPhone(raw)||'';}
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+const HK_TZ='Asia/Hong_Kong';
+function hkParts(value){
+  const d=value instanceof Date?value:new Date(value);
+  if(!(d instanceof Date)||Number.isNaN(d.getTime()))return null;
+  const parts=Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:HK_TZ,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23',weekday:'short'}).formatToParts(d).map(x=>[x.type,x.value]));
+  return parts;
+}
+function formatWhen(t){
+  if(!t&&t!==0)return '';
+  const s=String(t).trim().replace(/\s*HKT\s*$/i,'').replace(/（香港時間）/g,'').trim();
+  const wall=s.match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})(?::(\d{2}))?$/);
+  if(wall && !/[zZ]|[+-]\d{2}:\d{2}$/.test(String(t).trim()))return wall[1]+'-'+wall[2]+'-'+wall[3]+' '+wall[4]+':'+wall[5];
+  const p=hkParts(s);
+  return p?`${p.year}-${p.month}-${p.day} ${p.hour}:${p.minute}`:s;
+}
+function localDateTag(date){
+  const p=hkParts(date instanceof Date||date?date:new Date());
+  return p?`${p.year}-${p.month}-${p.day}`:'';
+}
+function dateStamp(v){
+  if(!v)return '';
+  const s=String(v).trim();
+  if(/[zZ]|[+-]\d{2}:\d{2}$/.test(s) || (!/^\d{4}-\d{2}-\d{2}[ T]\d{2}:/.test(s) && !/^\d{4}-\d{2}-\d{2}$/.test(s))){
+    const p=hkParts(s);return p?`${p.year}-${p.month}-${p.day}`:'';
+  }
+  const m=s.match(/^(\d{4}-\d{2}-\d{2})/);
+  return m?m[1]:(hkParts(s)?`${hkParts(s).year}-${hkParts(s).month}-${hkParts(s).day}`:'');
+}
+function toInputTime(t){
+  if(!t)return '';
+  const s=String(t).trim().replace(/\s*HKT\s*$/i,'').replace(/（香港時間）/g,'').trim();
+  const wall=s.match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})/);
+  if(wall && !/[zZ]|[+-]\d{2}:\d{2}$/.test(String(t).trim()))return wall[1]+'-'+wall[2]+'-'+wall[3]+'T'+wall[4]+':'+wall[5];
+  const p=hkParts(s);
+  return p?`${p.year}-${p.month}-${p.day}T${p.hour}:${p.minute}`:'';
+}
+function validDateTime(v){return !v||/^\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}/.test(String(v).trim());}
+function toLocalInput(d){const p=hkParts(d);return p?`${p.year}-${p.month}-${p.day}T${p.hour}:${p.minute}`:'';}
+function hkWeekday(d=new Date()){
+  const map={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};
+  const p=hkParts(d);
+  return p&&p.weekday in map?map[p.weekday]:null;
+}
+function addHkDays(days,hour=10,minute=0){
+  const p=hkParts(new Date());if(!p)return '';
+  const utc=Date.UTC(+p.year,+p.month-1,+p.day+days);
+  const x=new Date(utc);
+  const pad=n=>String(n).padStart(2,'0');
+  return `${x.getUTCFullYear()}-${pad(x.getUTCMonth()+1)}-${pad(x.getUTCDate())}T${pad(hour)}:${pad(minute)}`;
+}
+function hkPlusHours(hours){
+  return toLocalInput(new Date(Date.now()+hours*3600*1000));
+}
+function atHour(base,days,hour=10){
+  const p=hkParts(base||new Date());
+  const utc=Date.UTC(+p.year,+p.month-1,+p.day+days);
+  const x=new Date(utc);
+  const pad=n=>String(n).padStart(2,'0');
+  const s=`${x.getUTCFullYear()}-${pad(x.getUTCMonth()+1)}-${pad(x.getUTCDate())}T${pad(hour)}:00`;
+  return new Date(s+'+08:00');
+}
+function nextMonday(from=new Date()){
+  const dow=hkWeekday(from);const add=dow===0?1:(8-dow);
+  return atHour(from,add,10);
+}
+function normalizeContact(c){
+  const p=clean(c.phone);if(!p)return null;
+  const statusLabel=String(c.status||'');
+  const status=validStatus.has(c.status)?c.status:(reverseStatus[statusLabel]||'pending');
+  return {
+    name:String(c.name||''),phone:p,status,
+    consent:String(c.consent||''),evidence:String(c.evidence||''),
+    meetingTime:toInputTime(c.meetingTime||''),place:String(c.place||''),
+    notes:String(c.notes||''),callbackAt:toInputTime(c.callbackAt||c.followUpAt||''),
+    dncAt:String(c.dncAt||''),dncNote:String(c.dncNote||'')
+  };
+}
+function load(){try{
+  const saved=JSON.parse(localStorage.getItem(KEY)||'null');
+  if(saved&&Array.isArray(saved.list)&&Array.isArray(saved.history)&&Array.isArray(saved.blocked)){
+    const seen=new Set();const list=[];
+    for(const item of saved.list){const c=normalizeContact(item);if(c&&!seen.has(c.phone)){seen.add(c.phone);list.push(c);}}
+    const blocked=[...new Set(saved.blocked.map(clean).filter(Boolean))];
+    const blockedMeta=(saved.blockedMeta&&typeof saved.blockedMeta==='object')?saved.blockedMeta:{};
+    state={list,history:saved.history.filter(h=>h&&typeof h==='object'),blocked,blockedMeta};
+    for(const c of state.list){if(state.blocked.includes(c.phone))c.status='dnc';}
+  }
+}catch(e){savedOK=false;}}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(state));savedOK=true;}catch(e){savedOK=false;}return savedOK;}
+function notify(msg){const t=$('toast');if(!t)return;t.textContent=msg;t.classList.remove('hidden');clearTimeout(notify.timer);notify.timer=setTimeout(()=>t.classList.add('hidden'),4000);}
+function snap(){undoStack.push(JSON.stringify(state));if(undoStack.length>12)undoStack.shift();}
+function isBlocked(cOrPhone){
+  const phone=typeof cOrPhone==='string'?cOrPhone:(cOrPhone&&cOrPhone.phone);
+  if(!phone)return false;
+  if(state.blocked.includes(phone))return true;
+  const c=typeof cOrPhone==='object'?cOrPhone:state.list.find(x=>x.phone===phone);
+  return !!(c&&c.status==='dnc');
+}
+function isDueFollowUp(c){
+  if(!c||isBlocked(c)||!c.callbackAt)return false;
+  if(!(followUpStatuses.has(c.status)||c.status==='pending'||c.status==='dialing'))return false;
+  const day=dateStamp(c.callbackAt);if(!day)return false;
+  return day<=localDateTag(new Date());
+}
+function current(){
+  const dialing=state.list.find(x=>x.status==='dialing'&&!isBlocked(x));
+  if(dialing)return dialing;
+  const due=state.list.find(isDueFollowUp);
+  if(due)return due;
+  return state.list.find(x=>(x.status==='pending'||x.status==='dialing')&&!isBlocked(x));
+}
+function phoneDisplay(phone){return String(phone||'').replace(/^\+852(\d{4})(\d{4})$/,'+852 $1 $2');}
+function callsToday(){const today=localDateTag(new Date());return state.history.filter(h=>h.time&&dateStamp(h.time)===today);}
+function resultDimensions(status){
+  const map={'no-answer':['未接聽','尚未判斷'],connected:['已接通','尚未判斷'],interested:['已接通','有興趣'],callback:['已接通','約定回電'],'not-interested':['已接通','無興趣'],dnc:['已接通','拒絕推廣'],skipped:['未撥號','尚未判斷'],dialing:['未確定','尚未判斷']};
+  return map[status]||['未確定','尚未判斷'];
+}
+function attempts(phone){return state.history.filter(h=>h.phone===phone&&h.status!=='skipped').length;}
+function hasConsent(c){
+  if(!c)return false;
+  const mark=String(c.consent||'').trim().toLowerCase();
+  return !!(mark&&consentOk.has(mark)&&String(c.evidence||'').trim());
+}
+function pendingCount(){return state.list.filter(x=>['pending','dialing'].includes(x.status)&&!isBlocked(x)).length;}
+function dueList(){return state.list.filter(isDueFollowUp);}
+
+function renderRecentDialHistory(){
+  const box=$('recentDialHistoryList'),count=$('recentDialHistoryCount');
+  if(!box||!count)return;
+  const items=[...state.history].reverse().slice(0,5);
+  count.textContent=items.length?`最近 ${items.length} 條`:'最近 0 條';
+  box.replaceChildren();
+  if(!items.length){const p=document.createElement('p');p.className='muted';p.textContent='尚未有通話紀錄。';box.appendChild(p);return;}
+  for(const h of items){
+    const row=document.createElement('div');row.className='history-entry';
+    const left=document.createElement('div');left.className='grow';
+    const follow=h.followUpAt?` · 跟進 ${esc(formatWhen(h.followUpAt))}`:'';
+    left.innerHTML=`<b>${esc(h.name||'未命名')}</b> · ${esc(phoneDisplay(h.phone))}<small>${esc(formatWhen(h.time))} · ${esc(statuses[h.status]||h.status)} · ${esc(h.interest||resultDimensions(h.status)[1])}${follow}</small>`;
+    row.appendChild(left);box.appendChild(row);
+  }
+}
+function simplifyUI(){
+  document.body.removeAttribute('data-mode');
+  document.querySelectorAll('.onion-only').forEach(el=>el.remove());
+  document.querySelectorAll('.full-only').forEach(el=>el.classList.remove('full-only'));
+  document.querySelectorAll('.version').forEach(el=>el.remove());
+  const mode=$('modeSwitch'); if(mode) mode.remove();
+  const importPage=$('pageImport'), settingsPage=$('pageSettings');
+  if(importPage){
+    const heading=importPage.querySelector('.page-heading h2'); if(heading) heading.textContent='匯出匯入';
+    const brow=importPage.querySelector('.page-heading .eyebrow'); if(brow) brow.textContent='匯入、匯出與備份';
+    importPage.setAttribute('aria-label','匯出匯入');
+  }
+  if(importPage && settingsPage){
+    [...settingsPage.children].forEach(child=>{
+      if(child.classList && child.classList.contains('page-heading')) return;
+      importPage.appendChild(child);
+    });
+    settingsPage.remove();
+  }
+  const importBtn=document.querySelector('[data-nav="import"]');
+  if(importBtn) importBtn.innerHTML='<span>⇅</span>匯出匯入';
+  document.querySelectorAll('[data-nav="settings"]').forEach(el=>el.remove());
+  const recentWrap=document.createElement('div');
+  recentWrap.className='card';
+  recentWrap.id='recentDialHistoryCard';
+  recentWrap.innerHTML='<details><summary><div class="row" style="display:inline-flex;width:100%;justify-content:space-between;align-items:center"><span>最近五條通話記錄與結果</span><span class="chip" id="recentDialHistoryCount">最近 0 條</span></div></summary><div class="history" id="recentDialHistoryList"><p class="muted">尚未有通話紀錄。</p></div></details>';
+  const compliance=$('complianceCard');
+  if(compliance && !$('recentDialHistoryCard')) compliance.parentNode.insertBefore(recentWrap, compliance);
+  const clearBtn=$('clearFullHistory'); if(clearBtn){ const card=clearBtn.closest('.card'); clearBtn.remove(); const next=card && card.querySelector('.helper'); if(next) next.remove(); const divider=card && card.querySelector('.divider'); if(divider) divider.remove(); }
+  const footer=importPage && importPage.querySelector('.foot'); if(footer) footer.innerHTML='ColdCall OneTap · 測試版v2.0.1<br/>工具提供者：Meko Yuen';
+}
+
+function setPage(to){
+  if(!['dial','contacts','import'].includes(to))return;
+  page=to;
+  $all('.page').forEach(e=>e.classList.toggle('active',e.id==='page'+to[0].toUpperCase()+to.slice(1)));
+  $all('[data-nav]').forEach(el=>{const selected=el.dataset.nav===to;el.classList.toggle('active',selected);if(selected)el.setAttribute('aria-current','page');else el.removeAttribute('aria-current');});
+  const dock=$('dialDock');if(dock)dock.classList.toggle('hidden',to!=='dial');
+  try{localStorage.setItem(PAGE_KEY,to);}catch(e){}
+  window.scrollTo({top:0,behavior:'instant'});
+  render();
+}
+function goContacts(filter){contactFilter=filter;$all('[data-filter]').forEach(el=>el.classList.toggle('selected',el.dataset.filter===filter));setPage('contacts');}
+$all('[data-nav]').forEach(btn=>btn.addEventListener('click',()=>setPage(btn.dataset.nav)));
+$all('[data-goto]').forEach(btn=>btn.addEventListener('click',()=>setPage(btn.dataset.goto)));
+
+function updateDial(){
+  const c=current(),today=callsToday(),total=state.list.length,pending=pendingCount(),due=dueList();
+  $('todayCalls').textContent=today.length;
+  $('todayConnected').textContent=today.filter(h=>resultDimensions(h.status)[0]==='已接通').length;
+  const ti=$('todayInterested');if(ti)ti.textContent=today.filter(h=>h.status==='interested').length;
+  const tn=$('todayNoAnswer');if(tn)tn.textContent=today.filter(h=>h.status==='no-answer').length;
+  const td=$('todayDnc');if(td)td.textContent=today.filter(h=>h.status==='dnc').length;
+  $('countPending').textContent=pending;
+  $('position').textContent=`${c?state.list.indexOf(c)+1:total} / ${total}`;
+  const dueNow=c&&isDueFollowUp(c);
+  $('currentHint').textContent=c?(dueNow?'今日跟進到期':'下一個待聯絡號碼'):'目前沒有待聯絡號碼';
+  $('currentName').textContent=c?(c.name||'未命名聯絡人'):'目前沒有待撥號碼';
+  $('currentPhone').textContent=c?phoneDisplay(c.phone):'—';
+  $('currentStatus').textContent=c?(statuses[c.status]||'待撥')+(dueNow?' · 跟進已到期':''):'可於「匯出匯入」加入名單，或到「聯絡人」處理回撥';
+  const details=c?[
+    c.callbackAt?'跟進／回撥：'+formatWhen(c.callbackAt):'',
+    c.meetingTime?'見面時間：'+formatWhen(c.meetingTime):'',
+    c.place?'地點：'+c.place:'',
+    c.consent||c.evidence?'同意／依據：'+[c.consent,c.evidence].filter(Boolean).join(' · '):'',
+    c.notes?'備註：'+c.notes:'',
+    attempts(c.phone)?'已處理 '+attempts(c.phone)+' 次':''
+  ].filter(Boolean).join('\n'):'';
+  $('currentDetails').textContent=details;$('currentDetails').classList.toggle('hidden',!details);
+  const banner=$('resumeBanner');
+  if(banner){
+    banner.classList.toggle('hidden',total===0);
+    const remain=pending+due.filter(x=>!['pending','dialing'].includes(x.status)).length;
+    $('resumeText').textContent=total?`尚餘 ${pending} 位待撥；今日跟進到期 ${due.length} 位。關閉頁面後會從下一未完成號碼繼續。`:'尚未有待撥名單。';
+    const chip=$('dueChip');if(chip){chip.textContent='跟進到期 '+due.length;chip.className=due.length?'chip warn':'chip';}
+  }
+  const consentEl=$('consentNotice');
+  if(consentEl)consentEl.classList.toggle('hidden',!c||hasConsent(c));
+  $('editContact').disabled=!c;$('skip').disabled=!c||!!followTarget;$('undo').disabled=!undoStack.length;
+  $all('#resultSection button').forEach(b=>b.disabled=!c||!!followTarget);
+  const ready=!!c&&$('compliance').checked;
+  const callBtn=$('callBtn');
+  if(callBtn){callBtn.href=ready?'tel:'+c.phone:'#';callBtn.classList.toggle('disabled',!ready);callBtn.setAttribute('aria-disabled',String(!ready));callBtn.textContent=c&&c.status==='dialing'?'☎ 再次撥打這個號碼':'☎ 撥打這個號碼';}
+  $('dialGateNotice').classList.toggle('hidden',$('compliance').checked||!c);
+  $('complianceState').textContent=$('compliance').checked?'今日已確認':'尚未確認';
+  $('complianceState').className=$('compliance').checked?'chip':'chip warn';
+  $('dialEmptyActions').classList.toggle('hidden',total>0);
+  $('sessionInfo').textContent=savedOK?'資料僅存本機':'儲存異常';$('sessionInfo').className=savedOK?'chip':'chip warn';
+}
+
+function makePerson(c){
+  const item=document.createElement('div');item.className='person';const blocked=isBlocked(c);
+  const due=c.callbackAt?((isDueFollowUp(c)?'已到跟進時間：':'預約跟進：')+formatWhen(c.callbackAt)):callbackStates.has(c.status)?'未安排跟進時間':'';
+  const a=attempts(c.phone),extra=[due,c.meetingTime?'見面時間：'+formatWhen(c.meetingTime):'',c.place?'地點：'+c.place:'',a?'已處理 '+a+' 次':''].filter(Boolean).join(' · ');
+  item.innerHTML=`<div class="row start"><div class="grow"><b>${esc(c.name||'未命名聯絡人')}</b><div class="tel">${esc(phoneDisplay(c.phone))}</div><div class="meta">${esc(extra)}</div></div><span class="chip ${blocked?'danger':isDueFollowUp(c)?'warn':callbackStates.has(c.status)?'warn':''}">${esc(statuses[c.status]||c.status)}</span></div><div class="buttons"><button class="btn secondary small" type="button" data-edit="${esc(c.phone)}">編輯資料</button>${!blocked&&c.status!=='pending'&&c.status!=='dialing'?`<button class="btn primary small" data-queue="${esc(c.phone)}" type="button">列入待撥</button>`:''}${!blocked&&(callbackStates.has(c.status)||followUpStatuses.has(c.status))?`<button class="btn ghost small" data-schedule="${esc(c.phone)}" type="button">安排跟進</button>`:''}</div>`;
+  item.querySelector('[data-edit]').onclick=()=>openEditor(c.phone);
+  const queue=item.querySelector('[data-queue]');if(queue)queue.onclick=()=>returnToQueue(c.phone);
+  const schedule=item.querySelector('[data-schedule]');if(schedule)schedule.onclick=()=>openEditor(c.phone,true);
+  return item;
+}
+function dueOrder(c){if(c.callbackAt){const t=new Date(c.callbackAt).getTime();return Number.isFinite(t)?t:Number.MAX_SAFE_INTEGER;}return Number.MAX_SAFE_INTEGER-1;}
+function updateContacts(){
+  const q=$('searchContacts').value.trim().toLowerCase().replace(/\s+/g,'');
+  $('countTotal').textContent=state.list.length+' 筆';
+  const callbacks=state.list.filter(c=>callbackStates.has(c.status)&&!isBlocked(c));
+  $('countCallbacks').textContent=callbacks.length+' 筆';
+  const list=state.list.filter(c=>{
+    const digits=q.replace(/\D/g,'');const match=!q||(c.name||'').toLowerCase().includes(q)||(digits.length>0&&c.phone.replace(/\D/g,'').includes(digits));
+    if(!match)return false;
+    if(contactFilter==='pending')return ['pending','dialing'].includes(c.status)&&!isBlocked(c);
+    if(contactFilter==='due')return isDueFollowUp(c);
+    if(contactFilter==='callback')return callbackStates.has(c.status);
+    if(contactFilter==='interested')return c.status==='interested';
+    if(contactFilter==='completed')return !['pending','dialing','no-answer','callback'].includes(c.status);
+    if(contactFilter==='dnc')return isBlocked(c);
+    return true;
+  });
+  if(contactFilter==='callback'||contactFilter==='due')list.sort((a,b)=>dueOrder(a)-dueOrder(b));
+  const box=$('contactList');box.replaceChildren();
+  if(!list.length){const empty=document.createElement('div');empty.className='empty';empty.textContent=state.list.length?'沒有符合條件的聯絡人。':'尚未匯入聯絡人。';box.appendChild(empty);}
+  else{const chunk=document.createDocumentFragment();list.slice(0,500).forEach(c=>chunk.appendChild(makePerson(c)));box.appendChild(chunk);
+    if(list.length>500){const p=document.createElement('p');p.className='helper';p.textContent='僅顯示前 500 筆，請使用搜尋縮小範圍。';box.appendChild(p);}}
+  const history=[...state.history].reverse().slice(0,showingAllHistory?100:8);$('history').replaceChildren();
+  if(!history.length){$('history').innerHTML='<p class="muted">尚未有通話紀錄。</p>';}
+  else for(const h of history){
+    const entry=document.createElement('div');entry.className='history-entry';
+    const left=document.createElement('div');left.className='grow';
+    const follow=h.followUpAt?` · 跟進 ${esc(formatWhen(h.followUpAt))}`:'';
+    left.innerHTML=`<b>${esc(h.name||'未命名')}</b> · ${esc(phoneDisplay(h.phone))}<small>${esc(formatWhen(h.time))} · ${esc(statuses[h.status]||h.status)}${follow}</small>`;
+    const button=document.createElement('button');button.className='btn ghost small';button.textContent='編輯';
+    button.onclick=()=>{if(state.list.some(x=>x.phone===h.phone))openEditor(h.phone);else notify('此號碼已不在聯絡人名單。');};
+    entry.append(left,button);$('history').appendChild(entry);
+  }
+  $('historyMore').textContent=showingAllHistory?'收起':'查看全部';
+  renderDncList();
+}
+function lastBackupAt(){try{return Number(localStorage.getItem(LAST_BACKUP_KEY))||0;}catch(e){return 0;}}
+function backupNeeded(){const last=lastBackupAt();return state.list.length>0&&(last===0||Date.now()-last>7*864e5);}
+function markBackedUp(){try{localStorage.setItem(LAST_BACKUP_KEY,String(Date.now()));}catch(e){}}
+function updateBackup(){
+  const last=lastBackupAt(),need=backupNeeded();
+  const status=$('backupStatus');
+  if(status){status.textContent=state.list.length===0?'尚無需要備份的聯絡人。':last?'上次備份：'+formatWhen(new Date(last))+(need?' · 已超過 7 日，建議重新備份':' · 已備份'):'尚未建立備份，建議立即匯出 JSON 或 Excel。';
+    status.className=need?'warning-text backup-status':'backup-status';}
+  if($('storageState')){$('storageState').textContent=savedOK?'僅存本機':'儲存異常';$('storageState').className=savedOK?'chip':'chip warn';}
+  const nudge=$('backupNudge'),text=$('backupNudgeText');
+  if(nudge){
+    nudge.classList.toggle('hidden',!need);
+    if(text)text.textContent=last?'上次備份：'+formatWhen(new Date(last))+'。已超過 7 日，建議再匯出一份 JSON 或 Excel，以免本機資料遺失。':'尚未建立備份。建議匯出 JSON 或 Excel，以免清除瀏覽器後遺失紀錄。';
+  }
+}
+function render(){updateDial();if(page==='contacts')updateContacts();updateBackup();renderRecentDialHistory();}
+
+function loadCompliance(){
+  try{if(localStorage.getItem(COMPLIANCE_KEY)===localDateTag(new Date()))$('compliance').checked=true;}catch(e){}
+}
+$('compliance').addEventListener('change',()=>{
+  try{if($('compliance').checked)localStorage.setItem(COMPLIANCE_KEY,localDateTag(new Date()));else localStorage.removeItem(COMPLIANCE_KEY);}catch(e){}
+  render();
+});
+$('goCompliance').onclick=()=>{$('complianceCard').scrollIntoView({behavior:'smooth',block:'center'});$('compliance').focus();};
+const goBackup=$('goBackup');if(goBackup)goBackup.onclick=()=>setPage('import');
+
+function onCallClick(e){
+  const c=current();
+  if(!c||!$('compliance').checked){e.preventDefault();notify('請先完成合規確認並選擇待撥聯絡人。');$('complianceCard').scrollIntoView({behavior:'smooth',block:'center'});return;}
+  if(c.status==='pending'||isDueFollowUp(c)&&c.status!=='dialing'){snap();c.status='dialing';persist();render();}
+  highlightResults();
+}
+$('callBtn').addEventListener('click',onCallClick);
+function highlightResults(){
+  const wrap=$('resultSection');if(!wrap)return;
+  wrap.classList.add('highlight-results');
+  wrap.scrollIntoView({behavior:'smooth',block:'center'});
+  const tip=$('callTip');if(tip)tip.textContent='請記錄剛才的通話結果；選擇未接聽、已接通、有興趣或約定回電後，可即時設定跟進日期。';
+  setTimeout(()=>wrap.classList.remove('highlight-results'),2500);
+}
+
+function addBlocked(phone,meta={}){
+  if(!phone)return false;
+  if(!state.blocked.includes(phone))state.blocked.push(phone);
+  state.blockedMeta=state.blockedMeta||{};
+  const prev=state.blockedMeta[phone]||{};
+  state.blockedMeta[phone]={name:meta.name||prev.name||'',at:prev.at||meta.at||isoNow(),note:meta.note||prev.note||''};
+  const c=state.list.find(x=>x.phone===phone);
+  if(c){c.status='dnc';c.dncAt=c.dncAt||state.blockedMeta[phone].at;c.dncNote=c.dncNote||state.blockedMeta[phone].note;}
+  return true;
+}
+
+function mark(status){
+  const c=current();if(!c||!validStatus.has(status)||['pending','dialing'].includes(status))return;
+  if(status==='dnc'&&!confirm('確定記錄「拒絕再聯絡」？按《個人資料（私隱）條例》第 6A 部，客戶拒絕將個人資料用於直接促銷後，不得再向其進行相關推廣。此號碼會加入本機拒絕名單，日後匯入亦會被跳過。'))return;
+  snap();
+  c.status=status;
+  if(status==='dnc')addBlocked(c.phone,{name:c.name,at:isoNow(),note:'通話時表示拒絕聯絡'});
+  const [callOutcome,interest]=resultDimensions(status);
+  state.history.push({name:c.name,phone:c.phone,status,callOutcome,interest,time:isoNow(),followUpAt:c.callbackAt||''});
+  persist();render();
+  notify('已記錄：'+statuses[status]);
+  if(followUpStatuses.has(status))openFollowUp(c.phone,status);
+  else hideFollowUp();
+}
+$all('.result').forEach(button=>button.onclick=()=>mark(button.dataset.status));
+$('skip').onclick=()=>mark('skipped');
+$('undo').onclick=()=>{if(!undoStack.length)return;const parsed=JSON.parse(undoStack.pop());state={list:[],history:[],blocked:[],blockedMeta:{},...parsed};if(!state.blockedMeta)state.blockedMeta={};persist();hideFollowUp();render();notify('已撤銷上一步。');};
+$('editContact').onclick=()=>{const c=current();if(c)openEditor(c.phone);};
+
+function hideFollowUp(){followTarget=null;const p=$('followUpPanel');if(p)p.classList.add('hidden');}
+function openFollowUp(phone,status){
+  const c=state.list.find(x=>x.phone===phone);if(!c)return;
+  followTarget=phone;
+  const panel=$('followUpPanel');if(!panel)return;
+  panel.classList.remove('hidden');
+  $('followUpTitle').textContent='為「'+(c.name||phoneDisplay(phone))+'」設定跟進日期';
+  $('followUpHint').textContent=status==='callback'?'對方約定回電。請設定回撥時間，到期會自動排在撥號隊列最前。':status==='no-answer'?'未接聽。建議設跟進日期，避免遺漏再撥。':'可設定下次跟進或約見提醒；到期會優先出現在撥號頁。';
+  $('followUpCustom').value=c.callbackAt&&validDateTime(c.callbackAt)?c.callbackAt.slice(0,16):'';
+  panel.scrollIntoView({behavior:'smooth',block:'center'});
+}
+function applyFollow(dateObj){
+  if(!followTarget)return;
+  const c=state.list.find(x=>x.phone===followTarget);if(!c)return hideFollowUp();
+  snap();
+  c.callbackAt=toLocalInput(dateObj);
+  const last=state.history.filter(h=>h.phone===c.phone).at(-1);
+  if(last)last.followUpAt=c.callbackAt;
+  persist();hideFollowUp();render();notify('已設定跟進：'+formatWhen(c.callbackAt));
+}
+$all('[data-follow]').forEach(btn=>btn.onclick=()=>{
+  const now=new Date();let d;
+  if(btn.dataset.follow==='today'){d=new Date(now.getTime()+3*3600*1000);}
+  else if(btn.dataset.follow==='tomorrow')d=atHour(now,1,10);
+  else if(btn.dataset.follow==='dayafter')d=atHour(now,2,10);
+  else if(btn.dataset.follow==='monday')d=nextMonday(now);
+  if(d)applyFollow(d);
+});
+$('followUpSave').onclick=()=>{
+  const v=$('followUpCustom').value;
+  if(!v)return notify('請選擇跟進日期，或按快速選項。');
+  if(!validDateTime(v))return notify('跟進時間格式不正確。');
+  applyFollow(new Date(v));
+};
+$('followUpSkip').onclick=()=>{hideFollowUp();notify('已記錄結果，未設定跟進日期。');};
+
+$('addContact').onclick=()=>{
+  creatingContact=true;editingPhone=null;
+  $('editorTitle').textContent='新增聯絡人';$('editPhone').textContent='';$('newPhoneGroup').classList.remove('hidden');$('newContactPhone').value='';
+  $('editName').value='';$('editMeeting').value='';$('editPlace').value='';$('editCallback').value='';$('editNotes').value='';
+  const d=$('editorDialog');if(typeof d.showModal==='function')d.showModal();else d.setAttribute('open','');$('newContactPhone').focus();
+};
+function returnToQueue(phone){
+  const c=state.list.find(x=>x.phone===phone);
+  if(!c||isBlocked(phone))return notify('此號碼已列入拒絕聯絡名單，不能重新排隊。');
+  if(!confirm('確認已重新核實此聯絡人的適用授權及拒絕聯絡要求，並將其列入待撥名單？'))return;
+  snap();c.status='pending';persist();render();notify('已加入待撥名單。');
+}
+function openEditor(phone,focusCallback=false){
+  const c=state.list.find(x=>x.phone===phone);if(!c)return notify('找不到聯絡人。');
+  creatingContact=false;editingPhone=phone;$('editorTitle').textContent='編輯聯絡人';$('newPhoneGroup').classList.add('hidden');
+  $('editPhone').textContent=phoneDisplay(phone);$('editName').value=c.name||'';
+  $('editMeeting').value=(c.meetingTime||'').slice(0,16);
+  $('editPlace').value=c.place||'';$('editCallback').value=(c.callbackAt||'').slice(0,16);$('editNotes').value=c.notes||'';
+  const d=$('editorDialog');if(typeof d.showModal==='function')d.showModal();else d.setAttribute('open','');
+  (focusCallback?$('editCallback'):$('editName')).focus();
+}
+function closeEditor(){editingPhone=null;creatingContact=false;const d=$('editorDialog');if(typeof d.close==='function'&&d.open)d.close();else d.removeAttribute('open');}
+$('editorClose').onclick=closeEditor;$('cancelContact').onclick=closeEditor;
+$('editorDialog').addEventListener('click',e=>{if(e.target===$('editorDialog'))closeEditor();});
+$('saveContact').onclick=()=>{
+  const newPhone=creatingContact?clean($('newContactPhone').value):'';
+  if(creatingContact&&!newPhone)return notify('請輸入有效的香港電話號碼。');
+  if(creatingContact&&(state.list.some(c=>c.phone===newPhone)||state.blocked.includes(newPhone)))return notify('該號碼已存在或已列入本版拒絕聯絡名單。');
+  const c=creatingContact?null:state.list.find(x=>x.phone===editingPhone);
+  if(!creatingContact&&!c)return notify('目前無法儲存：聯絡人不存在。');
+  const meetingTime=$('editMeeting').value,callbackAt=$('editCallback').value;
+  if(meetingTime&&!validDateTime(meetingTime))return notify('見面時間格式不正確。');
+  if(callbackAt&&!validDateTime(callbackAt))return notify('回撥時間格式不正確。');
+  snap();
+  const target=creatingContact?normalizeContact({phone:newPhone,name:'',status:'pending'}):c;
+  if(creatingContact)state.list.push(target);
+  target.name=$('editName').value.trim();target.meetingTime=meetingTime;target.callbackAt=callbackAt;target.place=$('editPlace').value.trim();target.notes=$('editNotes').value.trim();
+  state.history.forEach(h=>{if(h.phone===target.phone)h.name=target.name;});
+  const wasNew=creatingContact,ok=persist();closeEditor();
+  if(wasNew){contactFilter='all';$all('[data-filter]').forEach(b=>b.classList.toggle('selected',b.dataset.filter==='all'));$('searchContacts').value='';}
+  render();notify(ok?(wasNew?'已手動新增聯絡人。':'聯絡人資料已儲存至本機。'):'儲存失敗，請匯出資料並檢查瀏覽器儲存空間。');
+};
+$('searchContacts').addEventListener('input',updateContacts);
+$all('[data-filter]').forEach(el=>el.onclick=()=>{contactFilter=el.dataset.filter;$all('[data-filter]').forEach(b=>b.classList.toggle('selected',b===el));updateContacts();});
+$('historyMore').onclick=()=>{showingAllHistory=!showingAllHistory;updateContacts();};
+
+function renderDncList(){
+  const box=$('dncList'),count=$('dncCount');if(!box||!count)return;
+  count.textContent=state.blocked.length+' 個號碼';
+  box.replaceChildren();
+  if(!state.blocked.length){const empty=document.createElement('div');empty.className='empty';empty.textContent='尚未有拒絕聯絡號碼。';box.appendChild(empty);return;}
+  for(const phone of state.blocked){
+    const meta=(state.blockedMeta&&state.blockedMeta[phone])||{};
+    const person=state.list.find(x=>x.phone===phone);
+    const row=document.createElement('div');row.className='dnc-item';
+    const info=document.createElement('div');info.className='grow';
+    info.innerHTML=`<div class="tel"><b>${esc(phoneDisplay(phone))}</b></div><div class="meta">${esc(person&&person.name||meta.name||'未命名')} · 列入：${esc(formatWhen(meta.at||(person&&person.dncAt)||'')||'—')}</div>`;
+    const del=document.createElement('button');del.className='btn ghost small';del.type='button';del.textContent='誤加移除';
+    del.onclick=()=>{
+      if(!confirm('只應在核實為誤加時移除。確定將 '+phoneDisplay(phone)+' 移出拒絕名單嗎？'))return;
+      snap();state.blocked=state.blocked.filter(p=>p!==phone);if(state.blockedMeta)delete state.blockedMeta[phone];
+      const c=state.list.find(x=>x.phone===phone);if(c&&c.status==='dnc'){c.status='pending';c.dncAt='';c.dncNote='';}
+      persist();render();notify('已移出拒絕名單。');
+    };
+    row.append(info,del);box.appendChild(row);
+  }
+}
+function importDncNumbers(raw,source='手動加入'){
+  const text=String(raw||'');
+  const parts=text.split(/[\s,;，；]+/).filter(Boolean);
+  const found=[];
+  for(const part of parts){const n=clean(part);if(n&&!found.includes(n))found.push(n);}
+  // also scan free text
+  if(window.ColdCallImport.phonesInCell){
+    for(const n of window.ColdCallImport.phonesInCell(text)){if(!found.includes(n))found.push(n);}
+  }
+  if(!found.length)return {added:0,existed:0};
+  snap();let added=0,existed=0;
+  for(const phone of found){
+    if(state.blocked.includes(phone)){existed++;continue;}
+    const person=state.list.find(x=>x.phone===phone);
+    addBlocked(phone,{name:person?person.name:'',at:isoNow(),note:source});
+    added++;
+  }
+  persist();render();
+  return {added,existed};
+}
+$('dncAdd').onclick=()=>{
+  const raw=$('dncAddPhone').value;
+  const n=clean(raw);
+  if(!n)return notify('請輸入有效的香港電話號碼。');
+  const r=importDncNumbers(n,'手動加入');
+  $('dncAddPhone').value='';
+  notify(r.added?'已加入拒絕名單。':r.existed?'此號碼已在拒絕名單。':'未能加入。');
+};
+$('dncImport').onclick=()=>{
+  const raw=$('dncPaste').value;
+  if(!raw.trim())return notify('請先貼上號碼。');
+  const r=importDncNumbers(raw,'批次匯入拒絕名單');
+  if(!r.added&&!r.existed)return notify('未能識別有效的香港電話號碼。');
+  $('dncPaste').value='';
+  notify('已加入 '+r.added+' 個拒絕號碼'+(r.existed?'，另有 '+r.existed+' 個原本已在名單':'')+'。');
+};
+
+function setStep(n){[1,2,3].forEach(i=>$('step'+i).classList.toggle('active',i===n));}
+function analyzeSheets(sheets){
+  pendingSheets=sheets;selectedSheet=0;selectedColumns=new Set();const select=$('sheetSelect');select.replaceChildren();
+  sheets.forEach((s,i)=>{const o=document.createElement('option');o.value=i;o.textContent=s.name+' · '+Math.max(0,s.rows.length-(s.start||0))+' 行';select.appendChild(o);});
+  $('preview').classList.remove('hidden');setStep(2);renderSheet();$('preview').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function renderSheet(){
+  const sheet=pendingSheets[selectedSheet];if(!sheet)return;
+  selectedColumns=new Set(sheet.columns.filter(c=>c.suggested).map(c=>c.index));
+  if(!selectedColumns.size&&sheet.columns.length===1&&sheet.columns[0].ratio>=.8&&!sheet.columns[0].negative)selectedColumns.add(sheet.columns[0].index);
+  const box=$('columnOptions');box.replaceChildren();
+  if(!sheet.columns.length){const p=document.createElement('p');p.className='error';p.textContent='未識別香港電話格式，請核對資料內容。';box.appendChild(p);}
+  for(const col of sheet.columns){
+    const label=document.createElement('label');label.className='colcheck';const cb=document.createElement('input');cb.type='checkbox';cb.checked=selectedColumns.has(col.index);
+    const info=document.createElement('span');const head=document.createElement('strong');head.textContent=col.label+'（第 '+(col.index+1)+' 欄）';
+    const sub=document.createElement('small');sub.textContent='找到 '+col.valid+' 筆候選電話'+(col.negative?' · 可能是編號':'')+(col.suggested?' · 推薦':'');
+    info.append(head,sub);label.append(cb,info);box.appendChild(label);
+    cb.onchange=()=>{if(cb.checked)selectedColumns.add(col.index);else selectedColumns.delete(col.index);renderPreview();};
+  }
+  renderPreview();
+}
+function checkEntries(recs){
+  const known=new Set(state.list.map(c=>c.phone)),blocked=new Set(state.blocked),ready=[],seen=new Set();
+  let dup=0,insufficient=0,dncSkip=0;
+  for(const rec of recs){
+    if(blocked.has(rec.phone)){dncSkip++;continue;}
+    if(known.has(rec.phone)||seen.has(rec.phone)){dup++;continue;}
+    seen.add(rec.phone);
+    const mark=String(rec.consent||'').trim().toLowerCase();
+    if(mark&&!(consentOk.has(mark)&&String(rec.evidence||'').trim()))insufficient++;
+    else if(!mark)insufficient++;
+    ready.push(rec);
+  }
+  return {ready,dup,insufficient,dncSkip};
+}
+function renderPreview(){
+  const sheet=pendingSheets[selectedSheet];if(!sheet)return;
+  const selected=[...selectedColumns];let parsed={records:[],duplicates:0};if(selected.length)parsed=ColdCallImport.recordsFromAnalysis(sheet,selected);
+  const check=checkEntries(parsed.records);
+  $('previewFound').textContent=parsed.records.length;
+  $('previewReady').textContent=check.ready.length;
+  $('previewExcluded').textContent=(parsed.duplicates||0)+check.dup+check.dncSkip;
+  $('confirmImport').disabled=!check.ready.length;setStep(check.ready.length?3:2);
+  const warnings=[];
+  if(!selected.length)warnings.push('請先選取電話欄位。');
+  if(sheet.isAmbiguous)warnings.push('欄位可能存在歧義，請核實。');
+  if((parsed.duplicates||0)+check.dup)warnings.push('重複號碼 '+((parsed.duplicates||0)+check.dup)+' 筆（已排除）。');
+  if(check.dncSkip)warnings.push('已在拒絕聯絡名單、已跳過 '+check.dncSkip+' 筆。');
+  if(check.insufficient)warnings.push('當中 '+check.insufficient+' 筆未見完整直接促銷同意／依據，仍可匯入，但撥號前請自行核實。');
+  $('previewWarning').textContent=warnings.join(' ');
+  $('sampleRows').replaceChildren();
+  if(!check.ready.length){$('sampleRows').innerHTML='<p class="muted">沒有可匯入的號碼。</p>';return;}
+  for(const r of check.ready.slice(0,8)){
+    const div=document.createElement('div');div.className='sample';
+    const name=document.createElement('span');name.textContent=r.name||'未命名';
+    const phone=document.createElement('b');phone.textContent=phoneDisplay(r.phone);
+    div.append(name,phone);$('sampleRows').appendChild(div);
+  }
+}
+$('sheetSelect').onchange=()=>{selectedSheet=Number($('sheetSelect').value)||0;renderSheet();};
+$('analyzeFile').onclick=async()=>{
+  const file=$('importFile').files[0];if(!file)return notify('請先選擇檔案。');
+  const btn=$('analyzeFile');btn.disabled=true;btn.textContent='正在本機分析…';
+  try{analyzeSheets(await ColdCallImport.loadFile(file));$('importInfo').textContent='已分析 '+file.name+'，尚未匯入。';}
+  catch(e){notify('分析失敗：'+e.message);$('importInfo').textContent=e.message;}
+  finally{btn.disabled=false;btn.textContent='分析檔案並預覽';}
+};
+$('analyzePaste').onclick=()=>{
+  try{const sheets=ColdCallImport.parseText($('paste').value,'txt').map(ColdCallImport.inspectSheet);analyzeSheets(sheets);$('importInfo').textContent='已分析貼上的文字，尚未匯入。';}
+  catch(e){notify('分析失敗：'+e.message);}
+};
+$('confirmImport').onclick=()=>{
+  const sheet=pendingSheets[selectedSheet];if(!sheet)return;
+  const parsed=ColdCallImport.recordsFromAnalysis(sheet,[...selectedColumns]);
+  const allowed=checkEntries(parsed.records).ready;
+  if(!allowed.length)return notify('沒有可匯入的號碼。');
+  snap();
+  for(const c of allowed)state.list.push({name:c.name,phone:c.phone,consent:c.consent,evidence:c.evidence,status:'pending',meetingTime:'',callbackAt:'',place:'',notes:'',dncAt:'',dncNote:''});
+  persist();pendingSheets=[];$('preview').classList.add('hidden');setStep(1);
+  $('importInfo').textContent='已成功匯入 '+allowed.length+' 筆聯絡人。';
+  notify('已成功匯入 '+allowed.length+' 筆聯絡人。');setPage('dial');
+};
+$('cancelImport').onclick=()=>{pendingSheets=[];$('preview').classList.add('hidden');setStep(1);$('importInfo').textContent='已取消預覽，未新增任何資料。';};
+
+function isLikelyIOS(){const ua=navigator.userAgent||'';if(/iPad|iPhone|iPod/.test(ua))return true;if(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1)return true;return false;}
+function downloadBlob(blob,filename){
+  const url=URL.createObjectURL(blob);
+  try{
+    const a=document.createElement('a');
+    a.href=url;a.download=filename;a.rel='noopener';a.style.display='none';
+    document.body.appendChild(a);a.click();a.remove();
+  }catch(e){}
+  if(isLikelyIOS())showSaveFallback(blob,filename,url);
+  else setTimeout(()=>{try{URL.revokeObjectURL(url);}catch(e){}},20000);
+}
+function showSaveFallback(blob,filename,url){
+  const box=$('saveSheet');
+  if(!box){setTimeout(()=>{try{URL.revokeObjectURL(url);}catch(e){}},20000);return;}
+  if(box._url&&box._url!==url){try{URL.revokeObjectURL(box._url);}catch(e){}}
+  $('saveSheetName').textContent=filename;
+  box.dataset.filename=filename;box._blob=blob;box._url=url;
+  box.classList.remove('hidden');
+  const shareBtn=$('saveSheetShare');
+  let shareOk=false;
+  try{
+    const file=new File([blob],filename,{type:blob.type||'application/octet-stream'});
+    shareOk=!!(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]}));
+  }catch(e){shareOk=false;}
+  if(shareBtn)shareBtn.classList.toggle('hidden',!shareOk);
+}
+function hideSaveSheet(){
+  const box=$('saveSheet');if(!box)return;
+  box.classList.add('hidden');
+  if(box._url){try{URL.revokeObjectURL(box._url);}catch(e){}box._url='';}
+  box._blob=null;
+}
+function openTerms(){
+  const d=$('termsDialog');if(!d)return;
+  if(typeof d.showModal==='function'){if(!d.open)d.showModal();}else d.setAttribute('open','');
+}
+function closeTerms(){
+  const d=$('termsDialog');if(!d)return;
+  if(typeof d.close==='function'&&d.open)d.close();else d.removeAttribute('open');
+}
+function bindSingleFileExtras(){
+  document.querySelectorAll('[data-open-terms]').forEach(el=>{
+    el.addEventListener('click',e=>{e.preventDefault();openTerms();});
+  });
+  const termsClose=$('termsClose');if(termsClose)termsClose.addEventListener('click',closeTerms);
+  const termsDlg=$('termsDialog');
+  if(termsDlg)termsDlg.addEventListener('click',e=>{if(e.target===termsDlg)closeTerms();});
+  const saveOpen=$('saveSheetOpen');
+  if(saveOpen)saveOpen.addEventListener('click',()=>{
+    const box=$('saveSheet');if(!box||!box._url)return;
+    const w=window.open(box._url,'_blank','noopener');
+    if(!w)location.href=box._url;
+  });
+  const saveShare=$('saveSheetShare');
+  if(saveShare)saveShare.addEventListener('click',async()=>{
+    const box=$('saveSheet');if(!box||!box._blob)return;
+    const filename=box.dataset.filename||'download';
+    const file=new File([box._blob],filename,{type:box._blob.type||'application/octet-stream'});
+    try{
+      if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
+        await navigator.share({files:[file],title:filename});
+      }else notify('此裝置未提供分享儲存功能，請改用「開啟檔案」。');
+    }catch(e){if(e&&e.name!=='AbortError')notify('未能分享檔案：'+(e.message||e));}
+  });
+  const saveDismiss=$('saveSheetDismiss');
+  if(saveDismiss)saveDismiss.addEventListener('click',hideSaveSheet);
+}
+
+function safeExportName(input,fallback){
+  const raw=String(input||'').trim().replace(/\.(?:xlsx|csv|json)$/i,'').replace(/[\\/:*?"<>|\x00-\x1f\x7f]/g,'-').replace(/\s+/g,' ').replace(/[. ]+$/g,'').trim().slice(0,110);
+  return raw||fallback;
+}
+let lastSuggestedExportName='';
+function defaultFullExportName(){return 'ColdCall-OneTap-'+($('exportScope').value==='today'?'今日紀錄-':'完整備份-')+localDateTag(new Date());}
+function syncFullExportName(force=false){const next=defaultFullExportName(),input=$('exportFilename');if(force||!input.value.trim()||input.value===lastSuggestedExportName)input.value=next;lastSuggestedExportName=next;}
+syncFullExportName(true);
+function syncExportHelp(){
+  const today=$('exportScope').value==='today',fmt=$('exportFormat').value;
+  if(fmt==='json'){$('exportScopeHelp').textContent='JSON 完整備份必定包含聯絡人、通話紀錄、拒絕聯絡名單及設定／進度；所有時間以香港時間寫入。此檔可用作完整還原。';}
+  else if(today){$('exportScopeHelp').textContent='只匯出香港時間當日的通話／處理紀錄，不包括其他聯絡人或全部拒絕名單；此檔案不能用作完整備份。時間皆為香港時間。';}
+  else{$('exportScopeHelp').textContent='完整 Excel 備份包含聯絡人、撥號紀錄、拒絕聯絡名單及今日統計。所有時間以香港時間（Asia/Hong_Kong）顯示。';}
+  const csvOpt=$('exportFormat').querySelector('option[value="csv"]');
+  if(csvOpt)csvOpt.textContent=today?'CSV（僅今天的紀錄）':'CSV（只包含聯絡人）';
+}
+$('exportScope').addEventListener('change',()=>{syncFullExportName();syncExportHelp();});
+$('exportFormat').addEventListener('change',()=>{
+  if($('exportFormat').value==='json'&&$('exportScope').value==='today'){$('exportScope').value='all';syncFullExportName();}
+  syncExportHelp();
+});
+function todayStatsRows(){
+  const today=callsToday();
+  const by=k=>today.filter(h=>h.status===k).length;
+  const connected=today.filter(h=>resultDimensions(h.status)[0]==='已接通').length;
+  return [['項目','數量'],
+    ['統計日期（香港時間）',localDateTag(new Date())],
+    ['時區','Asia/Hong_Kong（香港時間）'],
+    ['今日已處理',String(today.length)],
+    ['今日接通',String(connected)],
+    ['今日有興趣',String(by('interested'))],
+    ['今日未接聽',String(by('no-answer'))],
+    ['今日約定回電',String(by('callback'))],
+    ['今日無興趣',String(by('not-interested'))],
+    ['今日拒絕聯絡',String(by('dnc'))],
+    ['今日跳過',String(by('skipped'))],
+    ['目前待撥',String(pendingCount())],
+    ['今日跟進到期',String(dueList().length)],
+    ['聯絡人總數',String(state.list.length)],
+    ['拒絕聯絡名單',String(state.blocked.length)]];
+}
+function todayOnlySheet(){
+  const today=callsToday();const people=new Map(state.list.map(c=>[c.phone,c]));
+  return [
+    {name:'今日通話紀錄',widths:[22,21,22,16,22,26,42,16,16,22],rows:[['時間（香港時間）','姓名','電話','結果','見面時間（香港時間）','地點','其他資料','接通情況','客戶意向','跟進日期（香港時間）'],...today.map(h=>{const c=people.get(h.phone)||{};return [formatWhen(h.time),h.name||c.name||'',h.phone||'',statuses[h.status]||h.status,formatWhen(c.meetingTime),c.place||'',c.notes||'',h.callOutcome||resultDimensions(h.status)[0],h.interest||resultDimensions(h.status)[1],formatWhen(h.followUpAt||c.callbackAt)];})]},
+    {name:'今日統計',widths:[28,18],rows:todayStatsRows()}
+  ];
+}
+function csvEscape(v){let s=String(v??'');if(/^[=+\-@\t\r]/.test(s)&&!/^(?:\+852)?[2356789]\d{7}$/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"';}
+function sheetData(){return [
+  {name:'聯絡人名單',widths:[20,21,16,22,26,42,22,16,22,22,12],rows:[['姓名','電話','狀態','見面時間（香港時間）','地點','其他資料','授權依據','同意標記','回撥／跟進時間（香港時間）','拒絕聯絡時間（香港時間）','撥號次數'],...state.list.map(c=>[c.name||'',c.phone||'',statuses[c.status]||c.status,formatWhen(c.meetingTime),c.place||'',c.notes||'',c.evidence||'',c.consent||'',formatWhen(c.callbackAt),formatWhen(c.dncAt),String(attempts(c.phone))])]},
+  {name:'撥號紀錄',widths:[22,22,21,16,16,16,22,42],rows:[['時間（香港時間）','姓名','電話','結果','接通情況','客戶意向','跟進日期（香港時間）','備註'],...state.history.map(h=>{const c=state.list.find(x=>x.phone===h.phone)||{};return [formatWhen(h.time),h.name||'',h.phone||'',statuses[h.status]||h.status,h.callOutcome||resultDimensions(h.status)[0],h.interest||resultDimensions(h.status)[1],formatWhen(h.followUpAt||c.callbackAt),c.notes||''];})]},
+  {name:'拒絕聯絡',widths:[24,22,20,36],rows:[['拒絕聯絡號碼','列入時間（香港時間）','姓名','備註'],...state.blocked.map(v=>{const meta=(state.blockedMeta&&state.blockedMeta[v])||{};const c=state.list.find(x=>x.phone===v);return [v,formatWhen(meta.at||(c&&c.dncAt)||''),(c&&c.name)||meta.name||'',meta.note||(c&&c.dncNote)||''];})]},
+  {name:'今日統計',widths:[28,18],rows:todayStatsRows()}
+];}
+function jsonBackupObject(){
+  let complianceDay='',callScript='';
+  try{complianceDay=localStorage.getItem(COMPLIANCE_KEY)||'';callScript=localStorage.getItem(SCRIPT_KEY)||'';}catch(e){}
+  return {
+    app:'ColdCall OneTap',
+    version:'2.0.1',
+    exportedAt:formatWhen(new Date()),
+    timeZone:'Asia/Hong_Kong',
+    contacts:state.list.map(c=>({
+      name:c.name,phone:c.phone,status:c.status,consent:c.consent,evidence:c.evidence,
+      meetingTime:formatWhen(c.meetingTime),place:c.place,notes:c.notes,
+      callbackAt:formatWhen(c.callbackAt),dncAt:formatWhen(c.dncAt),dncNote:c.dncNote
+    })),
+    history:state.history.map(h=>({
+      name:h.name,phone:h.phone,status:h.status,callOutcome:h.callOutcome,interest:h.interest,
+      time:formatWhen(h.time),followUpAt:formatWhen(h.followUpAt)
+    })),
+    blocked:[...state.blocked],
+    blockedMeta:Object.fromEntries(Object.entries(state.blockedMeta||{}).map(([k,v])=>[k,{name:v.name||'',at:formatWhen(v.at),note:v.note||''}])),
+    settings:{complianceDay,callScript,lastBackup:lastBackupAt()?formatWhen(new Date(lastBackupAt())):''}
+  };
+}
+function toIsoFromDisplay(t){
+  if(!t)return '';
+  const s=String(t).trim().replace(/\s*HKT\s*$/i,'').replace(/（香港時間）/g,'').trim();
+  if(/[zZ]$/.test(s)||/[+-]\d{2}:\d{2}$/.test(s)){const d=new Date(s);return Number.isNaN(d.getTime())?s:d.toISOString();}
+  const wall=s.match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})(?::(\d{2}))?/);
+  if(wall){const d=new Date(`${wall[1]}-${wall[2]}-${wall[3]}T${wall[4]}:${wall[5]}:${wall[6]||'00'}+08:00`);return Number.isNaN(d.getTime())?s:d.toISOString();}
+  const d=new Date(s);return Number.isNaN(d.getTime())?s:d.toISOString();
+}
+function parseJsonBackup(obj){
+  if(!obj||typeof obj!=='object'||Array.isArray(obj))throw Error('不是有效的 JSON 備份檔。');
+  if(obj.app&&!String(obj.app).includes('ColdCall'))throw Error('此檔案不是 ColdCall OneTap 備份。');
+  const contactsIn=Array.isArray(obj.contacts)?obj.contacts:(Array.isArray(obj.list)?obj.list:null);
+  const historyIn=Array.isArray(obj.history)?obj.history:null;
+  const blockedIn=Array.isArray(obj.blocked)?obj.blocked:null;
+  if(!contactsIn&&!historyIn&&!blockedIn)throw Error('備份缺少聯絡人、通話紀錄或拒絕名單資料。');
+  const contacts=[],seen=new Set();
+  for(const item of (contactsIn||[])){
+    const c=normalizeContact(item);if(!c||seen.has(c.phone))continue;seen.add(c.phone);contacts.push(c);
+  }
+  const history=[];
+  for(const h of (historyIn||[])){
+    if(!h||typeof h!=='object')continue;
+    const phone=clean(h.phone);const raw=h.status;const status=reverseStatus[raw]||raw;
+    const time=toIsoFromDisplay(h.time||'');
+    if(phone&&validStatus.has(status)&&time)history.push({name:String(h.name||''),phone,status,time,callOutcome:String(h.callOutcome||resultDimensions(status)[0]),interest:String(h.interest||resultDimensions(status)[1]),followUpAt:toInputTime(h.followUpAt||'')});
+  }
+  const blocked=[],blockedMeta={};
+  for(const item of (blockedIn||[])){
+    const phone=clean(typeof item==='string'?item:(item&&item.phone));if(!phone)continue;
+    if(!blocked.includes(phone))blocked.push(phone);
+  }
+  const metaIn=(obj.blockedMeta&&typeof obj.blockedMeta==='object')?obj.blockedMeta:{};
+  for(const phone of blocked){
+    const v=metaIn[phone]||{};
+    blockedMeta[phone]={name:String(v.name||''),at:v.at?toIsoFromDisplay(v.at):'',note:String(v.note||'')};
+  }
+  for(const c of contacts)if(c.status==='dnc'&&!blocked.includes(c.phone)){blocked.push(c.phone);blockedMeta[c.phone]=blockedMeta[c.phone]||{name:c.name,at:c.dncAt?toIsoFromDisplay(c.dncAt):'',note:c.dncNote||''};}
+  if(!contacts.length&&!history.length&&!blocked.length)throw Error('備份沒有有效的聯絡人或紀錄。');
+  return {source:'json',contacts,history,blocked,blockedMeta,settings:obj.settings&&typeof obj.settings==='object'?obj.settings:null};
+}
+$('export').onclick=()=>{try{
+  const format=$('exportFormat').value,scope=$('exportScope').value;
+  const onlyToday=format!=='json'&&scope==='today';
+  const base=safeExportName($('exportFilename').value,defaultFullExportName());
+  if(format==='json'){
+    const payload=jsonBackupObject();
+    downloadBlob(new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'}),base+'.json');
+    markBackedUp();updateBackup();
+    notify('已匯出 JSON 完整備份（香港時間）。請妥善保管此未加密檔案。');
+    return;
+  }
+  const sheets=onlyToday?todayOnlySheet():sheetData();
+  if(onlyToday&&sheets[0].rows.length===1)return notify('今天尚未有通話／處理紀錄可匯出。');
+  if(format==='xlsx'){
+    downloadBlob(new Blob([ColdCallExport.build(sheets)],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}),base+'.xlsx');
+    notify(onlyToday?'已匯出今日紀錄 Excel（含今日統計，香港時間）。':'已產生完整 Excel 備份（香港時間；含聯絡人、紀錄、拒絕名單及今日統計）。');
+  }else{
+    const rows=sheets[0].rows;
+    const phoneCol=onlyToday?2:1;
+    const content=rows.map((row,i)=>row.map((v,j)=>csvEscape(i>0&&j===phoneCol&&/^\+852\d{8}$/.test(String(v))?String(v).slice(4):v)).join(',')).join('\r\n');
+    downloadBlob(new Blob(['\ufeff'+content],{type:'text/csv;charset=utf-8'}),base+'.csv');
+    notify(onlyToday?'已匯出今日通話／處理紀錄 CSV（香港時間）。':'已產生聯絡人 CSV；完整備份請使用 Excel 或 JSON。');
+  }
+  if(!onlyToday){markBackedUp();updateBackup();}
+}catch(e){notify('匯出失敗：'+e.message);}};
+
+function parseBackupSheets(sheets){
+  const people=sheets.find(x=>x.name==='聯絡人名單');if(!people)throw Error('缺少「聯絡人名單」工作表。請使用本工具產生的 Excel 備份。');
+  const index=(headers,key)=>headers.indexOf(key);
+  const headers=(people.rows[0]||[]).map(String);let phoneAt=index(headers,'電話');if(phoneAt<0)throw Error('聯絡人名單沒有「電話」欄位。');
+  const findCol=(headers,key)=>{let i=index(headers,key);if(i>=0)return i;return headers.findIndex(h=>h===key||String(h).startsWith(key+'（')||String(h).startsWith(key+'('));};
+  const get=(row,key)=>{const i=findCol(headers,key);return i<0?'':String(row[i]??'');};
+  const contacts=[],seen=new Set();
+  for(const row of people.rows.slice(1)){
+    const phone=clean(row[phoneAt]);if(!phone||seen.has(phone))continue;seen.add(phone);
+    const label=get(row,'狀態');const status=reverseStatus[label]||(validStatus.has(label)?label:'pending');
+    contacts.push(normalizeContact({name:get(row,'姓名'),phone,status,meetingTime:get(row,'見面時間'),place:get(row,'地點'),notes:get(row,'其他資料'),evidence:get(row,'授權依據'),consent:get(row,'同意標記'),callbackAt:get(row,'回撥／跟進時間')||get(row,'回撥時間'),dncAt:get(row,'拒絕聯絡時間')}));
+  }
+  const logSheet=sheets.find(s=>s.name==='撥號紀錄'),history=[];
+  if(logSheet){
+    const hh=(logSheet.rows[0]||[]).map(String);
+    const cell=(r,k)=>{let i=hh.indexOf(k);if(i<0)i=hh.findIndex(h=>h===k||String(h).startsWith(k+'（')||String(h).startsWith(k+'('));return i<0?'':String(r[i]??'');};
+    for(const row of logSheet.rows.slice(1)){
+      const phone=clean(cell(row,'電話')),time=cell(row,'時間'),raw=cell(row,'結果'),status=reverseStatus[raw]||raw;
+      if(phone&&validStatus.has(status)&&time)history.push({name:cell(row,'姓名'),phone,status,time:toIsoFromDisplay(time),callOutcome:cell(row,'接通情況')||resultDimensions(status)[0],interest:cell(row,'客戶意向')||resultDimensions(status)[1],followUpAt:toInputTime(cell(row,'跟進日期')||'')});
+    }
+  }
+  const denySheet=sheets.find(s=>s.name==='拒絕聯絡'),blocked=[],blockedMeta={};
+  if(denySheet){
+    const hh=(denySheet.rows[0]||[]).map(String);
+    const col=(r,k,fb)=>{let i=hh.indexOf(k);if(i<0)i=hh.findIndex(h=>h===k||String(h).startsWith(k+'（')||String(h).startsWith(k+'('));if(i>=0)return String(r[i]??'');return fb;};
+    for(const row of denySheet.rows.slice(1)){
+      const phone=clean(row[0]);if(!phone)continue;
+      if(!blocked.includes(phone))blocked.push(phone);
+      blockedMeta[phone]={at:toIsoFromDisplay(col(row,'列入時間','')),name:col(row,'姓名',''),note:col(row,'備註','')};
+    }
+  }
+  for(const c of contacts)if(c&&c.status==='dnc'&&!blocked.includes(c.phone))blocked.push(c.phone);
+  if(!contacts.length&&!history.length&&!blocked.length)throw Error('備份沒有有效的聯絡人或紀錄。');
+  return {source:'xlsx',contacts:contacts.filter(Boolean),history,blocked,blockedMeta,settings:null};
+}
+$('previewRestore').onclick=async()=>{
+  restoreData=null;$('restorePreview').classList.add('hidden');
+  const file=$('backupFile').files[0];if(!file)return notify('請先選擇 Excel 或 JSON 備份檔。');
+  try{
+    const name=(file.name||'').toLowerCase();
+    if(name.endsWith('.json')){
+      const text=await file.text();
+      let obj;try{obj=JSON.parse(text);}catch(err){throw Error('JSON 格式無效，請確認是本工具匯出的備份。');}
+      restoreData=parseJsonBackup(obj);
+    }else{
+      restoreData=parseBackupSheets(await ColdCallImport.loadFile(file));
+    }
+    const extra=restoreData.source==='json'?'此為 JSON 完整備份。':'此為 Excel 備份。';
+    $('restoreInfo').textContent=`${extra}偵測到聯絡人 ${restoreData.contacts.length} 筆、通話紀錄 ${restoreData.history.length} 筆、拒絕聯絡 ${restoreData.blocked.length} 筆。請選擇合併或取代。拒絕聯絡名單在兩種方式下都會保留並合併。`;
+    $('restorePreview').classList.remove('hidden');
+  }catch(e){notify('備份解析失敗：'+e.message);}
+};
+function applyRestore(mode){
+  if(!restoreData)return;
+  const isReplace=mode==='replace';
+  if(isReplace){
+    if(!confirm('確認以備份取代現有聯絡人及通話紀錄？現有拒絕聯絡名單會保留並與備份合併，不會刪除。建議先再備份一次。'))return;
+  }else{
+    if(!confirm('確認將備份合併到本機？現有聯絡人會保留；拒絕聯絡號碼會維持並與備份合併。'))return;
+  }
+  snap();
+  const prevBlocked=[...state.blocked];
+  const prevMeta=Object.assign({},state.blockedMeta||{});
+  if(isReplace){state.list=[];state.history=[];}
+  const known=new Map(state.list.map(c=>[c.phone,c]));let add=0;
+  for(const c of restoreData.contacts)if(!known.has(c.phone)){state.list.push(c);known.set(c.phone,c);add++;}
+  const logSig=h=>[h.time,h.phone,h.status].join('|');const logs=new Set(state.history.map(logSig));let logAdd=0;
+  for(const h of restoreData.history){const sig=logSig(h);if(!logs.has(sig)){state.history.push(h);logs.add(sig);logAdd++;}}
+  const denied=new Set([...prevBlocked,...state.blocked,...restoreData.blocked]);
+  state.blocked=[...denied];
+  state.blockedMeta=Object.assign({},restoreData.blockedMeta||{},prevMeta);
+  for(const c of state.list)if(denied.has(c.phone))c.status='dnc';
+  if(restoreData.settings){
+    try{
+      if(restoreData.settings.complianceDay)localStorage.setItem(COMPLIANCE_KEY,String(restoreData.settings.complianceDay));
+      if(typeof restoreData.settings.callScript==='string'){localStorage.setItem(SCRIPT_KEY,restoreData.settings.callScript);const box=$('callScript');if(box)box.value=restoreData.settings.callScript;}
+    }catch(e){}
+  }
+  persist();loadCompliance();restoreData=null;$('restorePreview').classList.add('hidden');render();
+  notify(isReplace?('已用備份取代聯絡人及紀錄（聯絡人 '+add+' 筆、紀錄 '+logAdd+' 筆）。拒絕名單已保留。'):('備份已合併：新增聯絡人 '+add+' 筆、紀錄 '+logAdd+' 筆。'));
+}
+$('confirmRestore').onclick=()=>applyRestore('merge');
+const replaceBtn=$('confirmReplace');if(replaceBtn)replaceBtn.onclick=()=>applyRestore('replace');
+const clearHistoryBtn=$('clearFullHistory');
+if(clearHistoryBtn)clearHistoryBtn.onclick=()=>{
+  if(!state.history.length)return notify('目前沒有通話紀錄。');
+  if(!confirm(`即將清除 ${state.history.length} 筆通話紀錄。保留 ${state.list.length} 位聯絡人及 ${state.blocked.length} 筆拒絕聯絡號碼。確定繼續嗎？`))return;
+  snap();state.history=[];const ok=persist();render();notify(ok?'通話紀錄已清除。':'清除後無法儲存，請檢查瀏覽器空間。');
+};
+$('reset').onclick=()=>{
+  if(!confirm(`即將清除本機 ${state.list.length} 位聯絡人、${state.history.length} 筆通話紀錄及 ${state.blocked.length} 筆拒絕聯絡號碼。請先備份，確定繼續嗎？`))return;
+  if(!confirm('最後確認：清除後無法透過本工具恢復，除非已有備份。拒絕聯絡名單亦會一併清除。'))return;
+  state={list:[],history:[],blocked:[],blockedMeta:{}};undoStack=[];persist();hideFollowUp();render();notify('已清除本機全部資料。');
+};
+
+function loadScript(){
+  const box=$('callScript');if(!box)return;
+  try{const saved=localStorage.getItem(SCRIPT_KEY);if(saved!=null)box.value=saved;}catch(e){}
+  if(!box.value)box.value='早晨／你好，我係持牌保險經紀，想花兩分鐘同你講吓保障需要。而家方便嗎？\n如對方拒絕：多謝你嘅時間，唔會再為直接促銷事宜騷擾你。';
+  box.addEventListener('input',()=>{try{localStorage.setItem(SCRIPT_KEY,box.value);}catch(e){}});
+}
+
+window.addEventListener('pageshow',()=>{
+  render();
+  const c=current();
+  if(page==='dial'&&c&&c.status==='dialing')$('resultSection')&&highlightResults();
+});
+
+simplifyUI();
+load();
+loadCompliance();
+loadScript();
+bindSingleFileExtras();
+page='dial';render();
+})();
+</script>
+</body>
+</html>
